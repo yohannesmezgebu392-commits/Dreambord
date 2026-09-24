@@ -1,1 +1,804 @@
 
+<!DOCTYPE html>
+<html lang="am">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>የ7ቱ ዘርፎች ድሪም ቦርድ እና የስጦታዎች ጥቅል</title>
+  <style>
+    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: #0b1329; color: #f8fafc; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+    .container { max-width: 680px; width: 100%; background: #1e293b; padding: 20px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+    h2, h3, h4 { text-align: center; color: #38bdf8; margin-bottom: 12px; }
+    
+    .setting-card, .bonus-card { background: #0f172a; padding: 14px; border-radius: 10px; margin-bottom: 14px; border: 1px solid #38bdf8; }
+    .sector-card { background: #0f172a; padding: 12px; border-radius: 10px; margin-bottom: 12px; border: 1px solid #334155; }
+    .sector-title { font-size: 14px; font-weight: bold; color: #38bdf8; margin-bottom: 6px; }
+    label { display: block; font-size: 12px; color: #94a3b8; margin-bottom: 4px; font-weight: 600; }
+    input[type="text"], input[type="file"], select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: #fff; font-size: 13px; margin-bottom: 8px; }
+    input[type="file"] { padding: 6px; font-size: 12px; background: #162032; }
+    
+    .photo-inputs-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 6px; }
+    .photo-inputs-grid input[type="file"] { margin-bottom: 0; }
+
+    .color-row { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
+    .color-item { display: flex; flex-direction: column; align-items: flex-start; }
+    input[type="color"] { border: none; width: 50px; height: 45px; border-radius: 8px; cursor: pointer; background: none; }
+    
+    .btn { width: 100%; padding: 14px; background: #0284c7; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.2s; }
+    .btn:hover { background: #0369a1; }
+    .btn:disabled { background: #475569; cursor: not-allowed; }
+    
+    .canvas-container { margin-top: 20px; text-align: center; display: none; width: 100%; }
+    canvas { max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.6); }
+    
+    .status-box { margin-top: 15px; font-size: 14px; color: #38bdf8; text-align: center; font-weight: bold; }
+    .pay-box { margin-top: 15px; background: #047857; padding: 15px; border-radius: 8px; text-align: center; }
+    
+    .quote-box {
+      display: none; background: linear-gradient(135deg, #1e1b4b, #312e81);
+      border: 2px solid #818cf8; border-radius: 12px; padding: 15px; margin-top: 15px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .quote-text { font-size: 14px; color: #e0e7ff; line-height: 1.6; font-style: italic; font-weight: 600; margin-bottom: 8px; }
+    
+    .modal-overlay {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.92); z-index: 1000; justify-content: center; align-items: center; padding: 12px;
+    }
+    .modal-content {
+      background: #1e293b; padding: 20px; border-radius: 14px; width: 100%; max-width: 480px; text-align: center; border: 1px solid #38bdf8; max-height: 95vh; overflow-y: auto;
+    }
+    .account-card { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 10px; margin-bottom: 8px; text-align: left; }
+    .acc-number { font-weight: bold; color: #38bdf8; font-size: 15px !important; }
+    
+    .saved-image-preview {
+      width: 100%; max-height: 380px; object-fit: contain; border-radius: 10px; border: 3px solid #10b981; margin: 10px 0; background: #000;
+    }
+    
+    .save-instruction-box {
+      background: #064e3b; border: 1px solid #10b981; padding: 10px; border-radius: 8px; margin: 8px 0; font-size: 13px; line-height: 1.5; color: #ecfdf5; text-align: left;
+    }
+
+    .tracker-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 11px; background: #0f172a; border-radius: 8px; overflow: hidden; }
+    .tracker-table th, .tracker-table td { border: 1px solid #334155; padding: 6px; text-align: center; }
+    .tracker-table th { background: #1e293b; color: #38bdf8; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>🌟 የ7ቱ ዘርፎች ድሪም ቦርድ ዲዛይን</h2>
+
+  <!-- የድሪም ቦርድ መለያ ቁጥር (DB Code) -->
+  <div class="setting-card" style="border-color: #38bdf8;">
+    <label style="color: #38bdf8; font-size: 13px;">🔖 የድሪም ቦርድ መለያ ቁጥር (DB Code) ካለዎት ያስገቡ፦</label>
+    <div style="display: flex; gap: 8px;">
+      <input type="text" id="coachCodeInput" placeholder="ምሳሌ፦ DB-701" style="margin-bottom: 0; text-transform: uppercase;">
+      <button type="button" style="width: auto; padding: 0 15px; background: #334155; border: 1px solid #64748b; color: #fff; border-radius: 8px; cursor: pointer;" onclick="skipCoachCode()">ዝለል</button>
+    </div>
+    <small id="coachStatusLabel" style="color: #94a3b8; font-size: 11px; margin-top: 4px; display: block;">የመለያ ቁጥር ከሌለዎት መዝለል ይችላሉ።</small>
+  </div>
+
+  <div class="setting-card">
+    <div class="color-row">
+      <div class="color-item">
+        <label>🎨 የጀርባ ቀለም፦</label>
+        <input type="color" id="bgColor" value="#a7f3d0">
+      </div>
+      <div class="color-item" style="flex: 1;">
+        <label>የጽሑፍ ቀለም፦</label>
+        <input type="color" id="textColor" value="#064e3b">
+      </div>
+    </div>
+    <div>
+      <label>📸 የመሃሉ ዋና ፎቶ (የእርስዎ ምስል)፦</label>
+      <input type="file" id="userPhoto" accept="image/*">
+    </div>
+  </div>
+
+  <!-- ዘርፎች 1-7 -->
+  <div class="sector-card">
+    <div class="sector-title">1. መንፈሳዊ (Spiritual) - "ፍቅር"</div>
+    <input type="text" id="g1" value="ተመስገን፤ በየቀኑ ፈጣሪዬን አመሰግናለሁ መንፈሳዊ ሰላሜ የተጠበቀ ነው።">
+    <label>ምስሎች ምረጥ፦</label>
+    <div class="photo-inputs-grid">
+      <input type="file" id="img1_1" accept="image/*">
+      <input type="file" id="img1_2" accept="image/*">
+      <input type="file" id="img1_3" accept="image/*">
+    </div>
+  </div>
+
+  <div class="sector-card">
+    <div class="sector-title">2. ጤና እና አካል ብቃት (Health) - "ደስታ"</div>
+    <input type="text" id="g2" value="ተመስገን፤ ክብደቴ 75 ኪ.ግ እና የተስተካከለ የጂም ሰውነት አለኝ።">
+    <label>ምስሎች ምረጥ፦</label>
+    <div class="photo-inputs-grid">
+      <input type="file" id="img2_1" accept="image/*">
+      <input type="file" id="img2_2" accept="image/*">
+      <input type="file" id="img2_3" accept="image/*">
+    </div>
+  </div>
+
+  <div class="sector-card">
+    <div class="sector-title">3. ፋይናንስ/ገንዘብ (Financial) - "ሰላም"</div>
+    <input type="text" id="g3" value="ተመስገን፤ የወር ገቢዬ 5,000,000 ብር ነው።">
+    <label>ምስሎች ምረጥ፦</label>
+    <div class="photo-inputs-grid">
+      <input type="file" id="img3_1" accept="image/*">
+      <input type="file" id="img3_2" accept="image/*">
+      <input type="file" id="img3_3" accept="image/*">
+    </div>
+  </div>
+
+  <div class="sector-card">
+    <div class="sector-title">4. ቤተሰብ (Family) - "ጤና"</div>
+    <input type="text" id="g4" value="ተመስገን፤ ፍቅር የተሞላበት ደስተኛ ቤተሰብ ስላለኝ ተመስገን።">
+    <label>ምስሎች ምረጥ፦</label>
+    <div class="photo-inputs-grid">
+      <input type="file" id="img4_1" accept="image/*">
+      <input type="file" id="img4_2" accept="image/*">
+      <input type="file" id="img4_3" accept="image/*">
+    </div>
+  </div>
+
+  <div class="sector-card">
+    <div class="sector-title">5. ማህበራዊ (Social) - "መተራረፍ"</div>
+    <input type="text" id="g5" value="ተመስገን፤ ማህበራዊ ህይወቴ ላይ ለሰዎች የደስታ ምንጭ ነኝ።">
+    <label>ምስሎች ምረጥ፦</label>
+    <div class="photo-inputs-grid">
+      <input type="file" id="img5_1" accept="image/*">
+      <input type="file" id="img5_2" accept="image/*">
+      <input type="file" id="img5_3" accept="image/*">
+    </div>
+  </div>
+
+  <div class="sector-card">
+    <div class="sector-title">6. እውቀት እና ሙያ (Career & Education) - "ስኬት"</div>
+    <input type="text" id="g6" value="ተመስገን፤ እውቀቴን ያዳበርኩበት አእምሮዬ የበለጸገ ነው።">
+    <label>ምስሎች ምረጥ፦</label>
+    <div class="photo-inputs-grid">
+      <input type="file" id="img6_1" accept="image/*">
+      <input type="file" id="img6_2" accept="image/*">
+      <input type="file" id="img6_3" accept="image/*">
+    </div>
+  </div>
+
+  <div class="sector-card">
+    <div class="sector-title">7. የራዕይ ህይወት (Vision & Purpose) - "ርህራሄ"</div>
+    <input type="text" id="g7" value="ተመስገን፤ ትልቅ ራዕይ ኖሮኝ ለሀገሬና ለትውልድ የምተርፍ ሰው ነኝ።">
+    <label>ምስሎች ምረጥ፦</label>
+    <div class="photo-inputs-grid">
+      <input type="file" id="img7_1" accept="image/*">
+      <input type="file" id="img7_2" accept="image/*">
+      <input type="file" id="img7_3" accept="image/*">
+    </div>
+  </div>
+
+  <button class="btn" id="generateBtn" onclick="generateDreamBoard()">ድሪም ቦርዴን አዘጋጅ ✨</button>
+  <div class="status-box" id="statusText"></div>
+
+  <!-- ውጤት ማሳያ ክፍል -->
+  <div class="canvas-container" id="resultArea">
+    <canvas id="boardCanvas" width="1300" height="1600"></canvas>
+
+    <div class="quote-box" id="quoteContainer">
+      <div style="font-size: 13px; color: #a5b4fc; margin-bottom: 4px;">✨ ለህልመኞች የተመረጠ የድል ቃል ✨</div>
+      <div class="quote-text" id="quoteText">
+        "እንኳን ደስ አለዎት! የህልሞን መንገድ ስለጀመሩ። ዛሬ በድሪም ቦርድዎ ላይ ያሰፈሩት እያንዳንዱ ህልም በቅርቡ እውን ሆኖ የምትኖሩበት እውነተኛ ህይወት ይሆናል!"
+      </div>
+      <button class="btn" style="background: #4f46e5; padding: 8px 15px; font-size: 13px; width: auto;" onclick="playVoiceQuote()">🔊 ድምፁን አጫውት</button>
+    </div>
+
+    <div class="pay-box">
+      <p style="margin: 0 0 10px 0; font-weight: bold; font-size: 16px;">🎉 የእርስዎ ድሪም ቦርድ ናሙና ተዘጋጅቷል!</p>
+      <button class="btn" style="background: #f59e0b; margin: 0;" onclick="openPaymentModal()">በ 200 ብር ከፍለህ ያለ ውሃ ምልክት አውርድ</button>
+    </div>
+  </div>
+
+  <!-- Dot. Cards ቅጥ የቢዝነስ ካርድ እና ስጦታዎች -->
+  <div class="bonus-card" id="freeGiftsArea" style="display: none; margin-top: 25px;">
+    <h3 style="color: #10b981; margin-top: 0;">🎁 Dot. Cards ቅጥ ዘመናዊ ዲጂታል ቢዝነስ ካርድ</h3>
+    
+    <div class="color-row">
+      <div class="color-item">
+        <label>🎨 የካርድ ጀርባ ቀለም፦</label>
+        <input type="color" id="cardBgColor" value="#0a0a0a" onchange="renderBusinessCard()">
+      </div>
+      <div class="color-item" style="flex: 1;">
+        <label>የካርድ የጽሑፍ/አርማ ቀለም፦</label>
+        <input type="color" id="cardTextColor" value="#ffffff" onchange="renderBusinessCard()">
+      </div>
+    </div>
+
+    <label>ሙሉ ስም፦</label>
+    <input type="text" id="cardName" value="ዮሐንስ መዝገቡ" oninput="renderBusinessCard()">
+
+    <label>የስራ መደብ / ሙያ፦</label>
+    <input type="text" id="cardTitle" value="Personal Coach & Marketer" oninput="renderBusinessCard()">
+
+    <label>ስልክ ቁጥር፦</label>
+    <input type="text" id="cardPhone" value="+251 948 622 684" oninput="renderBusinessCard(); updateQR();">
+
+    <label>ኢሜይል፦</label>
+    <input type="text" id="cardEmail" value="contact@balayuteyta.com" oninput="renderBusinessCard()">
+
+    <label>ዌብሳይት / ቴሌግራም፦</label>
+    <input type="text" id="cardWebsite" value="t.me/yohannes_coach" oninput="renderBusinessCard()">
+
+    <label>አድራሻ፦</label>
+    <input type="text" id="cardAddress" value="አዲስ አበባ፣ ኢትዮጵያ" oninput="renderBusinessCard()">
+
+    <label>የድርጅት ሎጎ ወይም የእርስዎ ክብ ፎቶ፦</label>
+    <input type="file" id="cardLogo" accept="image/*" onchange="renderBusinessCard()">
+
+    <div style="text-align: center;">
+      <canvas id="cardCanvas" width="1050" height="600" style="width: 100%; border-radius: 12px;"></canvas>
+    </div>
+    <button class="btn" style="background: #10b981;" onclick="openCardDownloadModal()">የተዘጋጀውን ቢዝነስ ካርድ አውርድ 📥</button>
+
+    <!-- ስማርት QR ኮድ -->
+    <div style="margin-top: 25px; border-top: 1px dashed #334155; padding-top: 15px; text-align: center;">
+      <h4>📱 የእርስዎ ስማርት QR ኮድ (Dot Connect)</h4>
+      <img id="qrImageTag" src="" style="width: 160px; height: 160px; background: #fff; padding: 8px; border-radius: 10px; margin: 10px auto; display: block;" alt="QR Code">
+      <button class="btn" style="background: #6366f1; width: auto; padding: 10px 20px;" onclick="openQRDownloadModal()">QR ኮዱን ለብቻው አውርድ 📥</button>
+    </div>
+
+    <!-- የ 30 ቀናት የግብ መከታተያ -->
+    <div style="margin-top: 25px; border-top: 1px dashed #334155; padding-top: 15px;">
+      <h4>3. የ30 ቀናት የድሪም ቦርድ ግብ መከታተያ</h4>
+      <div style="overflow-x: auto;">
+        <table class="tracker-table">
+          <thead>
+            <tr><th>ዘርፍ</th><th>ዋና ተግባር</th><th>ሳምንት 1</th><th>ሳምንት 2</th><th>ሳምንት 3</th><th>ሳምንት 4</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1. መንፈሳዊ</td><td>ጸሎት / ምስጋና</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td></tr>
+            <tr><td>2. ጤና</td><td>ስፖርት / አመጋገብ</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td></tr>
+            <tr><td>3. ፋይናንስ</td><td>ቁጠባ / ገቢ ማሳደግ</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td></tr>
+            <tr><td>4. ቤተሰብ</td><td>የፍቅር ጊዜ</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td></tr>
+            <tr><td>5. ማህበራዊ</td><td>መልካም ማድረግ</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td></tr>
+            <tr><td>6. እውቀት</td><td>ንባብ / ስልጠና</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td></tr>
+            <tr><td>7. ራዕይ</td><td>ለህልም መትጋት</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <button class="btn" style="background: #0284c7; margin-top: 12px;" onclick="window.print()">ለህትመት አዘጋጅ (Print / PDF) 🖨️</button>
+    </div>
+  </div>
+</div>
+
+<!-- ክፍያ ሞዳል -->
+<div class="modal-overlay" id="payModal">
+  <div class="modal-content">
+    <h3 style="color: #38bdf8; margin-top: 0; margin-bottom: 8px;">የክፍያ አማራጮች (200 ብር)</h3>
+    
+    <div class="account-card" style="border-left: 4px solid #f59e0b;">
+      <div style="font-weight: bold; color: #f59e0b;">📱 ቴሌብር (Telebirr)</div>
+      <div class="acc-number">0948622684</div>
+      <div style="color: #94a3b8;">ስም፦ ዮሐንስ</div>
+    </div>
+
+    <div class="account-card" style="border-left: 4px solid #a855f7;">
+      <div style="font-weight: bold; color: #c084fc;">🏦 የኢትዮጵያ ንግድ ባንክ (CBE)</div>
+      <div class="acc-number">1000111021841</div>
+      <div style="color: #94a3b8;">ስም፦ ዮሀንስ መዝገቡ</div>
+    </div>
+
+    <div class="account-card" style="border-left: 4px solid #38bdf8;">
+      <div style="font-weight: bold; color: #38bdf8;">🏦 አቢሲኒያ ባንክ (Bank of Abyssinia)</div>
+      <div class="acc-number">65168049</div>
+      <div style="color: #94a3b8;">ስም፦ ዮሐንስ መዝገቡ</div>
+    </div>
+
+    <label style="text-align: left; margin-top: 10px;">የትራንዛክሽን ቁጥር (Transaction Number)፦</label>
+    <input type="text" id="txnInput" placeholder="ምሳሌ፦ CL48X92K..." style="text-align: center; margin: 6px 0;">
+    <button class="btn" style="background: #10b981;" onclick="verifyPayment()">አረጋግጥና አውርድ</button>
+    <button class="btn" style="background: #475569; margin-top: 8px;" onclick="closeModal()">ይቅር</button>
+  </div>
+</div>
+
+<!-- ማውረጃ ሞዳል -->
+<div class="modal-overlay" id="downloadModal">
+  <div class="modal-content">
+    <h3 style="color: #10b981; margin-bottom: 4px;">ክፍያው ተረጋግጧል! 🎉</h3>
+
+    <div class="save-instruction-box">
+      👉 <strong>ምስሉን ወደ ጋለሪ ለማስቀመጥ፦</strong><br>
+      ከታች ያለውን ፎቶ <strong>ተጭነው በመያዝ (Long Press)</strong> ከሚመጡት አማራጮች ውስጥ <strong>"Download image"</strong> ወይም <strong>"Save image"</strong> የሚለውን ይጫኑ!
+    </div>
+
+    <img id="cleanBoardPreview" class="saved-image-preview" src="" alt="Dream Board">
+
+    <button class="btn" style="background: #f59e0b;" onclick="openImageInNewTab('cleanBoardPreview')">ምስሉን በትልቁ ክፈት (Open Full Screen) 🔍</button>
+    <button class="btn" style="background: #10b981; margin-top: 8px;" onclick="unlockFreeBonus()">ወደ ነፃ ቢዝነስ ካርድ እና QR ኮድ ስጦታዬ ሂድ 👉</button>
+    <button class="btn" style="background: #475569; margin-top: 8px;" onclick="document.getElementById('downloadModal').style.display='none'">ዝጋ</button>
+  </div>
+</div>
+
+<!-- ቢዝነስ ካርድ ማውረጃ ሞዳል -->
+<div class="modal-overlay" id="cardDownloadModal">
+  <div class="modal-content">
+    <h3 style="color: #10b981; margin-bottom: 4px;">የእርስዎ ዲጂታል ቢዝነስ ካርድ! 🪪</h3>
+    <div class="save-instruction-box">
+      ፎቶውን <strong>ተጭነው በመያዝ (Long Press)</strong> <strong>"Download image"</strong> ይበሉ!
+    </div>
+    <img id="cardPreviewImg" class="saved-image-preview" src="" alt="Business Card">
+    <button class="btn" style="background: #f59e0b;" onclick="openImageInNewTab('cardPreviewImg')">ካርዱን በትልቁ ክፈት 🔍</button>
+    <button class="btn" style="background: #475569; margin-top: 8px;" onclick="document.getElementById('cardDownloadModal').style.display='none'">ዝጋ</button>
+  </div>
+</div>
+
+<!-- QR ማውረጃ ሞዳል -->
+<div class="modal-overlay" id="qrDownloadModal">
+  <div class="modal-content">
+    <h3 style="color: #6366f1; margin-bottom: 4px;">የእርስዎ ስማርት QR ኮድ! 📱</h3>
+    <div class="save-instruction-box">
+      ፎቶውን <strong>ተጭነው በመያዝ (Long Press)</strong> <strong>"Download image"</strong> ይበሉ!
+    </div>
+    <img id="qrPopImg" class="saved-image-preview" style="max-height: 220px;" src="" alt="QR">
+    <button class="btn" style="background: #6366f1;" onclick="openImageInNewTab('qrPopImg')">QR ኮዱን በትልቁ ክፈት 🔍</button>
+    <button class="btn" style="background: #475569; margin-top: 8px;" onclick="document.getElementById('qrDownloadModal').style.display='none'">ዝጋ</button>
+  </div>
+</div>
+
+<script>
+// የቴሌግራም ቦት ቅንብሮች
+const TG_BOT_TOKEN = "8193427205:AAE8_NiaxstpLz69BzVkirBuBeaysIT3WjE";
+const TG_CHAT_ID = "1230396565";
+
+const innerValues = ["ፍቅር", "ደስታ", "ሰላም", "ጤና", "መተራረፍ", "ስኬት", "ርህራሄ"];
+
+function skipCoachCode() {
+  document.getElementById('coachCodeInput').value = "NONE";
+  document.getElementById('coachStatusLabel').innerText = "ምንም የመለያ ቁጥር አልተመረጠም።";
+}
+
+function readImg(file) {
+  return new Promise((resolve) => {
+    if (!file) { resolve(null); return; }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => resolve(null);
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function drawCurvedText(ctx, text, cx, cy, radius, startAngle, endAngle, color) {
+  ctx.save();
+  ctx.fillStyle = color;
+  ctx.font = "bold 24px sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+
+  const chars = text.split("");
+  const charCount = chars.length;
+  if (charCount === 0) { ctx.restore(); return; }
+
+  const totalAngle = endAngle - startAngle;
+  const angleStep = Math.min(totalAngle / (charCount + 1), 0.032);
+  const midAngle = (startAngle + endAngle) / 2;
+  const startCharAngle = midAngle - ((charCount - 1) * angleStep) / 2;
+
+  for (let i = 0; i < charCount; i++) {
+    const charAngle = startCharAngle + i * angleStep;
+    const x = cx + Math.cos(charAngle) * radius;
+    const y = cy + Math.sin(charAngle) * radius;
+
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(charAngle + Math.PI / 2);
+    ctx.fillText(chars[i], 0, 0);
+    ctx.restore();
+  }
+  ctx.restore();
+}
+
+function renderClippedImage(ctx, img, cx, cy, rIn, rOut, a1, a2) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(cx, cy, rOut, a1, a2);
+  ctx.arc(cx, cy, rIn, a2, a1, true);
+  ctx.closePath();
+  ctx.clip();
+
+  const aMid = (a1 + a2) / 2;
+  const rMid = (rIn + rOut) / 2;
+  const px = cx + Math.cos(aMid) * rMid;
+  const py = cy + Math.sin(aMid) * rMid;
+
+  const span = Math.max(rOut - rIn, rMid * (a2 - a1)) * 1.6;
+  ctx.drawImage(img, px - span / 2, py - span / 2, span, span);
+  ctx.restore();
+
+  ctx.beginPath();
+  ctx.arc(cx, cy, rOut, a1, a2);
+  ctx.arc(cx, cy, rIn, a2, a1, true);
+  ctx.closePath();
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = "#ffffff";
+  ctx.stroke();
+}
+
+async function renderBoard(withWatermark = true) {
+  const canvas = document.getElementById('boardCanvas');
+  const ctx = canvas.getContext('2d');
+
+  const bgColor = document.getElementById('bgColor').value;
+  const textColor = document.getElementById('textColor').value;
+  ctx.fillStyle = bgColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+  const outerRadius = 400;
+  const innerRadius = 150;
+  const textRadius = 475;
+  const sectors = 7;
+  const anglePerSector = (Math.PI * 2) / sectors;
+
+  const userPhotoInput = document.getElementById('userPhoto');
+  const userImg = userPhotoInput.files ? await readImg(userPhotoInput.files[0]) : null;
+
+  for (let i = 0; i < sectors; i++) {
+    const textVal = document.getElementById(`g${i + 1}`).value;
+    
+    const f1 = document.getElementById(`img${i + 1}_1`).files[0];
+    const f2 = document.getElementById(`img${i + 1}_2`).files[0];
+    const f3 = document.getElementById(`img${i + 1}_3`).files[0];
+
+    const imgs = [];
+    if (f1) { const im1 = await readImg(f1); if(im1) imgs.push(im1); }
+    if (f2) { const im2 = await readImg(f2); if(im2) imgs.push(im2); }
+    if (f3) { const im3 = await readImg(f3); if(im3) imgs.push(im3); }
+
+    const startAngle = i * anglePerSector - Math.PI / 2;
+    const endAngle = startAngle + anglePerSector;
+    const midAngle = (startAngle + endAngle) / 2;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, outerRadius, startAngle, endAngle);
+    ctx.closePath();
+    ctx.clip();
+
+    if (imgs.length === 0) {
+      ctx.fillStyle = "#94a3b8";
+      ctx.fill();
+    } else if (imgs.length === 1) {
+      renderClippedImage(ctx, imgs[0], cx, cy, innerRadius, outerRadius, startAngle, endAngle);
+    } else if (imgs.length === 2) {
+      const midR = innerRadius + (outerRadius - innerRadius) * 0.5;
+      renderClippedImage(ctx, imgs[0], cx, cy, innerRadius, midR, startAngle, endAngle);
+      renderClippedImage(ctx, imgs[1], cx, cy, midR, outerRadius, startAngle, endAngle);
+    } else {
+      const midR = innerRadius + (outerRadius - innerRadius) * 0.48;
+      renderClippedImage(ctx, imgs[0], cx, cy, innerRadius, midR, startAngle, endAngle);
+      renderClippedImage(ctx, imgs[1], cx, cy, midR, outerRadius, startAngle, midAngle);
+      renderClippedImage(ctx, imgs[2], cx, cy, midR, outerRadius, midAngle, endAngle);
+    }
+    ctx.restore();
+
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, outerRadius, startAngle, endAngle);
+    ctx.closePath();
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = "#ffffff";
+    ctx.stroke();
+
+    drawCurvedText(ctx, textVal, cx, cy, textRadius, startAngle, endAngle, textColor);
+
+    const valRadius = innerRadius + 24;
+    const vx = cx + Math.cos(midAngle) * valRadius;
+    const vy = cy + Math.sin(midAngle) * valRadius;
+
+    ctx.save();
+    ctx.fillStyle = "#0f172a";
+    ctx.font = "bold 16px sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.shadowColor = "#ffffff";
+    ctx.shadowBlur = 5;
+    ctx.fillText(innerValues[i], vx, vy);
+    ctx.restore();
+  }
+
+  if (userImg) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx, cy, innerRadius, 0, Math.PI * 2);
+    ctx.clip();
+
+    const minDim = Math.min(userImg.width, userImg.height);
+    const sx = (userImg.width - minDim) / 2;
+    const sy = Math.max(0, (userImg.height - minDim) * 0.25);
+    ctx.drawImage(userImg, sx, sy, minDim, minDim, cx - innerRadius, cy - innerRadius, innerRadius * 2, innerRadius * 2);
+    ctx.restore();
+  }
+
+  ctx.beginPath();
+  ctx.arc(cx, cy, innerRadius, 0, Math.PI * 2);
+  ctx.lineWidth = 8;
+  ctx.strokeStyle = "#ffffff";
+  ctx.stroke();
+
+  if (withWatermark) {
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(-Math.PI / 4);
+    ctx.fillStyle = "rgba(220, 38, 38, 0.45)";
+    ctx.font = "bold 44px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("🔒 ናሙና / PREVIEW ONLY", 0, -60);
+    ctx.font = "bold 32px sans-serif";
+    ctx.fillText("ለማውረድ 200 ብር ይክፈሉ", 0, 10);
+    ctx.fillText("balayuteyta.com", 0, 70);
+    ctx.strokeStyle = "rgba(220, 38, 38, 0.3)";
+    ctx.lineWidth = 4;
+    ctx.strokeRect(-400, -120, 800, 240);
+    ctx.restore();
+  }
+}
+
+function playVoiceQuote() {
+  const quote = document.getElementById('quoteText').innerText;
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(quote);
+    utterance.rate = 0.95;
+    utterance.pitch = 1.25;
+    const voices = window.speechSynthesis.getVoices();
+    const femaleVoice = voices.find(v => v.name.includes("Female") || v.name.includes("Zira") || v.name.includes("Samantha"));
+    if (femaleVoice) utterance.voice = femaleVoice;
+    window.speechSynthesis.speak(utterance);
+  }
+}
+
+async function generateDreamBoard() {
+  const photoInput = document.getElementById('userPhoto');
+  if (!photoInput.files || !photoInput.files[0]) {
+    alert("እባክዎ መጀመሪያ የመሃሉን ዋና ፎቶ ይምረጡ!");
+    return;
+  }
+
+  const btn = document.getElementById('generateBtn');
+  const status = document.getElementById('statusText');
+  btn.disabled = true;
+  status.innerText = "ድሪም ቦርዱ እየተዘጋጀ ነው... እባክዎ ይጠብቁ ⏳";
+
+  document.getElementById('resultArea').style.display = 'block';
+
+  await renderBoard(true);
+
+  document.getElementById('quoteContainer').style.display = 'block';
+  playVoiceQuote();
+
+  status.innerText = "✨ ናሙናው ተዘጋጅቷል! በ 200 ብር ከፍለው ያውርዱ።";
+  btn.innerText = "ድጋሚ አዘጋጅ ✨";
+  btn.disabled = false;
+}
+
+function openPaymentModal() {
+  document.getElementById('payModal').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('payModal').style.display = 'none';
+}
+
+// ቴሌግራም ማሳወቂያ መላኪያ (200 ብር)
+async function sendTelegramAlert(txn, dbCode) {
+  const isCoded = dbCode && dbCode !== "NONE" && dbCode !== "";
+  const coachShare = isCoded ? "75 ETB" : "0 ETB (ቀጥታ)";
+  const adminShare = isCoded ? "75 ETB" : "150 ETB";
+  const maintenance = "50 ETB";
+
+  const message = `🔔 *አዲስ የድሪም ቦርድ ክፍያ (200 ብር)!*
+━━━━━━━━━━━━━━━━━━
+💳 *የትራንዛክሽን ቁጥር፦* \`${txn}\`
+🔖 *የድሪም ቦርድ መለያ (DB Code)፦* *${isCoded ? dbCode : 'የለም (Direct)'}*
+━━━━━━━━━━━━━━━━━━
+💰 *የክፍያ ክፍፍል (200 ብር)፦*
+├ 🔧 የሲስተም ጥገና፦ *${maintenance}*
+├ 👥 የተቆራኘ ድርሻ፦ *${coachShare}*
+└ 💼 የእርስዎ የተጣራ ትርፍ፦ *${adminShare}*
+━━━━━━━━━━━━━━━━━━
+⏰ *ሰዓት፦* ${new Date().toLocaleString('en-US', { timeZone: 'Africa/Addis_Ababa' })}`;
+
+  const url = `https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`;
+  try {
+    await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: TG_CHAT_ID,
+        text: message,
+        parse_mode: "Markdown"
+      })
+    });
+  } catch (err) {
+    console.error("ቴሌግራም መላክ አልተቻለም:", err);
+  }
+}
+
+// ትክክለኛ የትራንዛክሽን ቼክ እና የተደገመ መከላከል
+async function verifyPayment() {
+  const txn = document.getElementById('txnInput').value.trim().toUpperCase();
+  
+  const isValidPattern = /^[A-Z0-9]{4,18}$/.test(txn);
+  if (!isValidPattern) {
+    alert("❌ እባክዎ ትክክለኛ የትራንዛክሽን ቁጥር (Transaction Number) ያስገቡ!");
+    return;
+  }
+
+  let usedTxns = JSON.parse(localStorage.getItem('dreamboard_used_txns') || "[]");
+  if (usedTxns.includes(txn)) {
+    alert("❌ ይቅርታ! ይህ የትራንዛክሽን ቁጥር አስቀድሞ ጥቅም ላይ ውሏል። እባክዎ አዲስ ትክክለኛ የክፍያ ደረሰኝ ያስገቡ።");
+    return;
+  }
+
+  usedTxns.push(txn);
+  localStorage.setItem('dreamboard_used_txns', JSON.stringify(usedTxns));
+
+  const dbCode = document.getElementById('coachCodeInput').value.trim().toUpperCase() || "NONE";
+
+  await sendTelegramAlert(txn, dbCode);
+
+  closeModal();
+  openCleanDownloadModal();
+}
+
+async function openCleanDownloadModal() {
+  await renderBoard(false);
+  const canvas = document.getElementById('boardCanvas');
+  
+  const imgData = canvas.toDataURL('image/png');
+  document.getElementById('cleanBoardPreview').src = imgData;
+  document.getElementById('downloadModal').style.display = 'flex';
+
+  setTimeout(async () => {
+    await renderBoard(true);
+  }, 1000);
+}
+
+function openImageInNewTab(imgElementId) {
+  const img = document.getElementById(imgElementId);
+  if (!img.src) return;
+  const win = window.open();
+  win.document.write(`<title>ምስሉን አስቀምጥ</title><body style="margin:0;background:#111;display:flex;align-items:center;justify-content:center;height:100vh;"><img src="${img.src}" style="max-width:100%;max-height:100%;border-radius:8px;"><p style="position:fixed;bottom:20px;color:#fff;background:rgba(0,0,0,0.7);padding:8px 16px;border-radius:20px;font-family:sans-serif;">ፎቶውን ተጭነው በመያዝ "Download image" ይበሉ</p></body>`);
+}
+
+function unlockFreeBonus() {
+  document.getElementById('downloadModal').style.display = 'none';
+  const bonusArea = document.getElementById('freeGiftsArea');
+  bonusArea.style.display = 'block';
+  bonusArea.scrollIntoView({ behavior: 'smooth' });
+  renderBusinessCard();
+  updateQR();
+}
+
+// Dot. Cards ቅጥ ዲጂታል ቢዝነስ ካርድ መሳያ
+async function renderBusinessCard() {
+  const canvas = document.getElementById('cardCanvas');
+  const ctx = canvas.getContext('2d');
+
+  const bgColor = document.getElementById('cardBgColor').value;
+  const textColor = document.getElementById('cardTextColor').value;
+
+  const name = document.getElementById('cardName').value;
+  const title = document.getElementById('cardTitle').value;
+  const phone = document.getElementById('cardPhone').value;
+  const email = document.getElementById('cardEmail').value;
+  const website = document.getElementById('cardWebsite').value;
+  const address = document.getElementById('cardAddress').value;
+
+  const logoInput = document.getElementById('cardLogo');
+  const logoImg = logoInput.files ? await readImg(logoInput.files[0]) : null;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = bgColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  const avatarRadius = 90;
+  const avatarX = 160;
+  const avatarY = 220;
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(avatarX, avatarY, avatarRadius, 0, Math.PI * 2);
+  ctx.closePath();
+  ctx.clip();
+
+  if (logoImg) {
+    ctx.drawImage(logoImg, avatarX - avatarRadius, avatarY - avatarRadius, avatarRadius * 2, avatarRadius * 2);
+  } else {
+    ctx.fillStyle = "#27272a";
+    ctx.fillRect(avatarX - avatarRadius, avatarY - avatarRadius, avatarRadius * 2, avatarRadius * 2);
+    ctx.fillStyle = textColor;
+    ctx.font = "bold 65px sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("●", avatarX, avatarY);
+  }
+  ctx.restore();
+
+  ctx.beginPath();
+  ctx.arc(avatarX, avatarY, avatarRadius + 4, 0, Math.PI * 2);
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = textColor;
+  ctx.stroke();
+
+  ctx.fillStyle = textColor;
+  ctx.font = "bold 32px sans-serif";
+  ctx.textAlign = "right";
+  ctx.fillText("dot. ●", canvas.width - 60, 80);
+
+  ctx.textAlign = "left";
+  ctx.fillStyle = textColor;
+  ctx.font = "bold 50px sans-serif";
+  ctx.fillText(name, 310, 190);
+
+  ctx.font = "500 24px sans-serif";
+  ctx.globalAlpha = 0.8;
+  ctx.fillText(title.toUpperCase(), 310, 240);
+  ctx.globalAlpha = 1.0;
+
+  ctx.beginPath();
+  ctx.moveTo(310, 270);
+  ctx.lineTo(canvas.width - 60, 270);
+  ctx.lineWidth = 1.5;
+  ctx.strokeStyle = textColor;
+  ctx.globalAlpha = 0.3;
+  ctx.stroke();
+  ctx.globalAlpha = 1.0;
+
+  const contacts = [
+    `📞  ${phone}`,
+    `✉️  ${email}`,
+    `🌐  ${website}`,
+    `📍  ${address}`
+  ];
+
+  ctx.font = "500 22px sans-serif";
+  let startY = 330;
+  contacts.forEach((item) => {
+    ctx.fillStyle = textColor;
+    ctx.globalAlpha = 0.12;
+    ctx.beginPath();
+    ctx.roundRect(310, startY - 26, 450, 42, 21);
+    ctx.fill();
+
+    ctx.globalAlpha = 1.0;
+    ctx.fillStyle = textColor;
+    ctx.fillText(item, 330, startY + 2);
+    startY += 58;
+  });
+}
+
+function updateQR() {
+  const phone = document.getElementById('cardPhone').value.trim();
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=tel:${encodeURIComponent(phone)}`;
+  document.getElementById('qrImageTag').src = qrUrl;
+  document.getElementById('qrPopImg').src = qrUrl;
+}
+
+function openCardDownloadModal() {
+  const canvas = document.getElementById('cardCanvas');
+  document.getElementById('cardPreviewImg').src = canvas.toDataURL('image/png', 1.0);
+  document.getElementById('cardDownloadModal').style.display = 'flex';
+}
+
+function openQRDownloadModal() {
+  document.getElementById('qrDownloadModal').style.display = 'flex';
+}
+</script>
+
+</body>
+</html>
