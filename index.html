@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ባላዩት እይታ | የ7ቱ ዘርፎች ድሪም ቦርድ እና ስማርት ብራንዲንግ</title>
+  <title>ባላዩት እይታ | የ7ቱ የህይወት ዘርፎች ድሪም ቦርድ እና ዘመናዊ ኪው አርኮድ ያለው ቢዝነስ ካርድ ነፃ ስጦታ እና qr ኮድ</title>
   <style>
     * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     body {
@@ -19,18 +19,18 @@
     .container {
       max-width: 720px;
       width: 100%;
-      background: rgba(30, 41, 59, 0.7);
+      background: rgba(30, 41, 59, 0.75);
       backdrop-filter: blur(12px);
       padding: 24px;
       border-radius: 20px;
-      border: 1px solid rgba(212, 175, 55, 0.25);
+      border: 1px solid rgba(212, 175, 55, 0.3);
       box-shadow: 0 15px 35px rgba(0,0,0,0.6);
     }
     .brand-header {
       text-align: center;
       margin-bottom: 20px;
       padding-bottom: 15px;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
     }
     .brand-logo-text {
       font-size: 26px;
@@ -47,18 +47,19 @@
       font-size: 13px;
       letter-spacing: 1px;
       margin-top: 4px;
+      line-height: 1.5;
     }
     h2, h3, h4 { color: #f8fafc; margin-bottom: 12px; }
     
     .setting-card, .bonus-card {
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(15, 23, 42, 0.85);
       padding: 16px;
       border-radius: 12px;
       margin-bottom: 16px;
       border: 1px solid #334155;
     }
     .sector-card {
-      background: rgba(15, 23, 42, 0.75);
+      background: rgba(15, 23, 42, 0.8);
       padding: 14px;
       border-radius: 12px;
       margin-bottom: 12px;
@@ -111,7 +112,6 @@
     .canvas-container { margin-top: 20px; text-align: center; display: none; width: 100%; }
     canvas { max-width: 100%; height: auto; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
 
-    /* የተጠቃሚውን ስሜት የሚያነሳሳ የክብር መልዕክት እና የነፃ ስጦታዎች ቦክስ */
     .vip-offer-card {
       background: linear-gradient(145deg, #1e1b4b 0%, #0f172a 100%);
       border: 2px solid #818cf8;
@@ -161,6 +161,21 @@
       max-height: 95vh;
       overflow-y: auto;
     }
+    .account-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+    .acc-number {
+      font-weight: bold;
+      color: #f1c40f;
+      font-size: 16px;
+      letter-spacing: 1px;
+      margin: 2px 0;
+    }
     .saved-image-preview {
       width: 100%;
       max-height: 380px;
@@ -178,10 +193,10 @@
 <body>
 
 <div class="container">
-  <!-- የባላዩት እይታ ፕሪሚየም ራስጌ -->
+  <!-- የባላዩት እይታ ራስጌ -->
   <div class="brand-header">
     <div class="brand-logo-text">BALAYUT EYTA</div>
-    <div class="brand-sub">የ7ቱ ዘርፎች ድሪም ቦርድ እና የኤክስኪዩቲቭ ስማርት መለያ ኪት</div>
+    <div class="brand-sub">የ7ቱ የህይወት ዘርፎች ድሪም ቦርድ እና ዘመናዊ ኪው አርኮድ ያለው ቢዝነስ ካርድ ነፃ ስጦታ እና qr ኮድ</div>
   </div>
 
   <!-- DB Code -->
@@ -211,7 +226,7 @@
     </div>
   </div>
 
-  <!-- 7ቱ ዘርፎች -->
+  <!-- 7ቱ የህይወት ዘርፎች -->
   <div class="sector-card">
     <div class="sector-title">1. መንፈሳዊ (Spiritual) - "ፍቅር"</div>
     <input type="text" id="g1" value="ተመስገን፤ በየቀኑ ፈጣሪዬን አመሰግናለሁ መንፈሳዊ ሰላሜ የተጠበቀ ነው።">
@@ -292,16 +307,15 @@
   <button class="btn" id="generateBtn" onclick="generateDreamBoard()">ድሪም ቦርዴን በከፍተኛ ጥራት አዘጋጅ ✨</button>
   <div id="statusText" style="text-align: center; margin-top: 10px; color: #f1c40f; font-weight: bold;"></div>
 
-  <!-- ውጤት ማሳያ ክፍል -->
+  <!-- ውጤት ማሳያ -->
   <div class="canvas-container" id="resultArea">
     <canvas id="boardCanvas" width="1300" height="1600"></canvas>
 
-    <!-- ከመክፈላቸው በፊት የሚያጓጓ የክብር መልዕክት እና የነፃ ስጦታዎች እሴት -->
     <div class="vip-offer-card">
       <div class="vip-badge">👑 የተጠቃሚዎች የክብር ስጦታ ጥቅል</div>
       <h3 style="color: #fff; margin: 4px 0 10px 0; font-size: 17px;">ህልምህን እውን ለማድረግ የተዘጋጀ የተሟላ የቢዝነስ ጥቅል!</h3>
       <p style="font-size: 13px; color: #cbd5e1; line-height: 1.6; margin: 0 0 12px 0;">
-        እንኳን ደስ አለዎት! ህልምን መጻፍ የመጀመሪያው የድል እርምጃ ነው። የ 200 ብር ክፍያ ሲፈጽሙ ድሪም ቦርድዎን ያለ ውሃ ምልክት ከማውረድ በተጨማሪ <strong>ከ 1,500 ብር በላይ ዋጋ ያላቸውን</strong> የሚከተሉትን 3 ልዩ ስጦታዎች በነፃ ያገኛሉ፦
+        እንኳን ደስ አለዎት! ህልምን መጻፍ የመጀመሪያው የድል እርምጃ ነው። የ 5 ብር የሙከራ ክፍያ ሲፈጽሙ ድሪም ቦርድዎን ያለ ውሃ ምልክት ከማውረድ በተጨማሪ <strong>ከ 1,500 ብር በላይ ዋጋ ያላቸውን</strong> የሚከተሉትን 3 ልዩ ስጦታዎች በነፃ ያገኛሉ፦
       </p>
       <div class="vip-gift-item">🎁 <strong>ስጦታ 1፦</strong> በ12 ዓለም አቀፍ የዲዛይን ስታይል የተዘጋጀ ስማርት ዲጂታል ቢዝነስ ካርድ።</div>
       <div class="vip-gift-item">📱 <strong>ስጦታ 2፦</strong> ስልክዎን፣ ቴሌግራምዎን እና አድራሻዎን በአንድ ስካን የሚያገናኝ Smart QR Code።</div>
@@ -310,15 +324,14 @@
 
     <div style="background: rgba(15, 23, 42, 0.95); padding: 18px; border-radius: 14px; border: 1px solid #d4af37; text-align: center;">
       <p style="margin: 0 0 10px 0; font-weight: bold; font-size: 16px; color: #fff;">🎉 ናሙናው በተሳካ ሁኔታ ተዘጋጅቷል!</p>
-      <button class="btn" style="background: linear-gradient(135deg, #10b981, #059669); color: white;" onclick="openPaymentModal()">ሁሉንም ጥቅሎች በ 200 ብር አውርድ 🚀</button>
+      <button class="btn" style="background: linear-gradient(135deg, #10b981, #059669); color: white;" onclick="openPaymentModal()">ሁሉንም ጥቅሎች በ 5 ብር አውርድ 🚀</button>
     </div>
   </div>
 
-  <!-- ቢዝነስ ካርድ እና ስጦታዎች (12ቱ ዲዛይኖች የተካተቱበት) -->
+  <!-- 12ቱ ቢዝነስ ካርዶችና ስጦታዎች -->
   <div class="bonus-card" id="freeGiftsArea" style="display: none; margin-top: 25px; border-color: #d4af37;">
     <h3 style="color: #f1c40f; margin-top: 0; text-align: center;">🎁 የስማርት ዲጂታል ቢዝነስ ካርድ መስሪያ</h3>
     
-    <!-- 12ቱ የዲዛይን እና የቀለም አማራጮች -->
     <label style="color: #f1c40f; font-size: 13px;">✨ የካርድ ዲዛይን እና የቀለም ቅጥ ይምረጡ (12 ምርጫዎች)፦</label>
     <select id="cardThemeSelect" onchange="applySelectedTheme()" style="font-weight: bold; border-color: #d4af37;">
       <option value="nexora_gold">1. Nexora Black & Solid Gold (ከፍተኛ ተመራጭ)</option>
@@ -407,21 +420,48 @@
   </div>
 </div>
 
-<!-- Chapa ክፍያ ሞዳል -->
+<!-- የቀጥታ የባንክና የቴሌብር ክፍያ ሞዳል (ለሙከራ በ5 ብር) -->
 <div class="modal-overlay" id="payModal">
   <div class="modal-content">
     <div class="brand-logo-text" style="font-size: 20px; margin-bottom: 6px;">BALAYUT EYTA</div>
-    <h3 style="color: #f1c40f; margin-top: 0; margin-bottom: 8px;">የክፍያ አማራጭ (200 ብር)</h3>
-    <p style="color: #cbd5e1; font-size: 13px; line-height: 1.5; margin-bottom: 18px;">
-      በቴሌብር (Telebirr)፣ በንግድ ባንክ (CBE) ወይም በካርድዎ በChapa በኩል ክፍያውን በሰከንዶች ውስጥ ይፈጽሙ።
+    <h3 style="color: #f1c40f; margin-top: 0; margin-bottom: 8px;">የሙከራ ክፍያ አማራጮች (5 ብር)</h3>
+    <p style="color: #cbd5e1; font-size: 13px; line-height: 1.5; margin-bottom: 15px;">
+      ከታች ባሉት የክፍያ አማራጮች <strong>5 ብር</strong> ከፍለው የትራንዛክሽን ቁጥሩን ከስር ያስገቡ፦
     </p>
 
-    <!-- ትክክለኛው የቻፓ ክፍያ ሊንክ እዚህ ጋር ገብቷል -->
-    <a id="chapaPayButton" href="http://checkout.chapa.co/checkout/web/payment/PL-vPgc8LOmCVo3" target="_blank" class="btn" style="background: linear-gradient(135deg, #10b981, #059669); color: white; font-size: 16px; margin-bottom: 10px;">
-      💳 በቴሌብር ወይም በባንክ ይክፈሉ (200 ብር)
-    </a>
+    <!-- ቴሌብር -->
+    <div class="account-card" style="border-left: 4px solid #10b981;">
+      <div style="font-weight: bold; color: #10b981;">📱 ቴሌብር (Telebirr)</div>
+      <div class="acc-number">0948622684</div>
+      <div style="color: #94a3b8; font-size: 12px;">ስም፦ ዮሐንስ መዝገቡ (Yohannes Mezgebu)</div>
+    </div>
 
-    <button class="btn" style="background: #334155; color: #cbd5e1;" onclick="closeModal()">ይቅር</button>
+    <!-- ንግድ ባንክ -->
+    <div class="account-card" style="border-left: 4px solid #a855f7;">
+      <div style="font-weight: bold; color: #c084fc;">🏦 የኢትዮጵያ ንግድ ባንክ (CBE)</div>
+      <div class="acc-number">1000111021841</div>
+      <div style="color: #94a3b8; font-size: 12px;">ስም፦ ዮሐንስ መዝገቡ (Yohannes Mezgebu)</div>
+    </div>
+
+    <!-- አቢሲኒያ ባንክ -->
+    <div class="account-card" style="border-left: 4px solid #38bdf8;">
+      <div style="font-weight: bold; color: #38bdf8;">🏦 አቢሲኒያ ባንክ (Bank of Abyssinia)</div>
+      <div class="acc-number">65168049</div>
+      <div style="color: #94a3b8; font-size: 12px;">ስም፦ ዮሐንስ መዝገቡ (Yohannes Mezgebu)</div>
+    </div>
+
+    <!-- የኦሮሚያ ህብረት ስራ ባንክ -->
+    <div class="account-card" style="border-left: 4px solid #f97316;">
+      <div style="font-weight: bold; color: #fb923c;">🏦 የኦሮሚያ ህብረት ስራ ባንክ (Coop Bank of Oromia)</div>
+      <div class="acc-number">1011000083793</div>
+      <div style="color: #94a3b8; font-size: 12px;">ስም፦ ዮሐንስ መዝገቡ (Yohannes Mezgebu)</div>
+    </div>
+
+    <label style="text-align: left; margin-top: 12px;">የትራንዛክሽን ቁጥር (Transaction Number)፦</label>
+    <input type="text" id="txnInput" placeholder="ምሳሌ፦ CL48X92K..." style="text-align: center; margin: 6px 0; text-transform: uppercase;">
+    
+    <button class="btn" style="background: linear-gradient(135deg, #10b981, #059669); color: white;" onclick="verifyPayment()">አረጋግጥና አውርድ 🚀</button>
+    <button class="btn" style="background: #334155; color: #cbd5e1; margin-top: 8px;" onclick="closeModal()">ይቅር</button>
   </div>
 </div>
 
@@ -441,7 +481,7 @@
 <!-- ቢዝነስ ካርድ ማውረጃ ሞዳል -->
 <div class="modal-overlay" id="cardDownloadModal">
   <div class="modal-content">
-    <h3 style="color: #10b981; margin-bottom: 4px;">የእርስዎ ኤክስኪዩቲቭ ቢዝነስ ካርድ! 🪪</h3>
+    <h3 style="color: #10b981; margin-bottom: 4px;">የእርስዎ ቢዝነስ ካርድ! 🪪</h3>
     <p style="color: #cbd5e1; font-size: 13px;">ፎቶውን ተጭነው በመያዝ <strong>"Download image"</strong> ይበሉ!</p>
     <img id="cardPreviewImg" class="saved-image-preview" src="" alt="Business Card">
     <button class="btn" style="background: #f59e0b; color: #0b0f19;" onclick="openImageInNewTab('cardPreviewImg')">ካርዱን በትልቁ ክፈት 🔍</button>
@@ -464,12 +504,8 @@
 const TG_BOT_TOKEN = "8193427205:AAE8_NiaxstpLz69BzVkirBuBeaysIT3WjE";
 const TG_CHAT_ID = "1230396565";
 
-// ትክክለኛው የቻፓ ሊንክ በስክሪፕቱ ውስጥ ተቀምጧል
-const CHAPA_LINK = "http://checkout.chapa.co/checkout/web/payment/PL-vPgc8LOmCVo3";
-
 const innerValues = ["ፍቅር", "ደስታ", "ሰላም", "ጤና", "መተራረፍ", "ስኬት", "ርህራሄ"];
 
-// 12ቱ የካርድ ጭብጦች (Themes)
 const cardThemes = {
   nexora_gold:     { bg: "#111111", accent: "#f59e0b", text: "#ffffff", style: "curve_right" },
   altura_emerald:  { bg: "#042f2e", accent: "#d4af37", text: "#fcf6ba", style: "corner_wave" },
@@ -684,7 +720,7 @@ async function renderBoard(withWatermark = true) {
     ctx.textAlign = "center";
     ctx.fillText("🔒 ናሙና / PREVIEW ONLY", 0, -50);
     ctx.font = "bold 30px sans-serif";
-    ctx.fillText("ለማውረድ 200 ብር ይክፈሉ", 0, 15);
+    ctx.fillText("ለማውረድ 5 ብር ይክፈሉ", 0, 15);
     ctx.fillText("balayuteyta.com", 0, 70);
     ctx.strokeStyle = "rgba(220, 38, 38, 0.35)";
     ctx.lineWidth = 4;
@@ -715,8 +751,6 @@ async function generateDreamBoard() {
 }
 
 function openPaymentModal() {
-  const chapaBtn = document.getElementById('chapaPayButton');
-  if (chapaBtn) chapaBtn.href = CHAPA_LINK;
   document.getElementById('payModal').style.display = 'flex';
 }
 
@@ -724,9 +758,23 @@ function closeModal() {
   document.getElementById('payModal').style.display = 'none';
 }
 
-async function sendTelegramSuccessAlert(ref) {
-  const dbCode = document.getElementById('coachCodeInput').value.trim().toUpperCase() || "NONE";
-  const message = `🔔 *አዲስ የተረጋገጠ የቻፓ (Chapa) ክፍያ (200 ብር)!*\n💳 *ማረጋገጫ፦* \`${ref}\`\n🔖 *የድሪም ቦርድ መለያ፦* *${dbCode}*\n⏰ *ሰዓት፦* ${new Date().toLocaleString('en-US', { timeZone: 'Africa/Addis_Ababa' })}`;
+async function sendTelegramSuccessAlert(txn, dbCode) {
+  const isCoded = dbCode && dbCode !== "NONE" && dbCode !== "";
+  const coachShare = isCoded ? "2 ETB" : "0 ETB (ቀጥታ)";
+  const adminShare = isCoded ? "2 ETB" : "4 ETB";
+  const maintenance = "1 ETB";
+
+  const message = `🔔 *አዲስ የድሪም ቦርድ የሙከራ ክፍያ (5 ብር)!*
+━━━━━━━━━━━━━━━━━━
+💳 *የትራንዛክሽን ቁጥር፦* \`${txn}\`
+🔖 *የድሪም ቦርድ መለያ (DB Code)፦* *${isCoded ? dbCode : 'የለም (Direct)'}*
+━━━━━━━━━━━━━━━━━━
+💰 *የክፍያ ክፍፍል (5 ብር)፦*
+├ 🔧 የሲስተም ጥገና፦ *${maintenance}*
+├ 👥 የተቆራኘ ድርሻ፦ *${coachShare}*
+└ 💼 የእርስዎ የተጣራ ትርፍ፦ *${adminShare}*
+━━━━━━━━━━━━━━━━━━
+⏰ *ሰዓት፦* ${new Date().toLocaleString('en-US', { timeZone: 'Africa/Addis_Ababa' })}`;
 
   try {
     await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
@@ -734,7 +782,32 @@ async function sendTelegramSuccessAlert(ref) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ chat_id: TG_CHAT_ID, text: message, parse_mode: "Markdown" })
     });
-  } catch (err) { console.error(err); }
+  } catch (err) { console.error("ቴሌግራም መላክ አልተቻለም:", err); }
+}
+
+async function verifyPayment() {
+  const txn = document.getElementById('txnInput').value.trim().toUpperCase();
+  const isValidPattern = /^[A-Z0-9]{4,18}$/.test(txn);
+  
+  if (!isValidPattern) {
+    alert("❌ እባክዎ ትክክለኛ የትራንዛክሽን ቁጥር (Transaction Number) ያስገቡ!");
+    return;
+  }
+
+  let usedTxns = JSON.parse(localStorage.getItem('dreamboard_used_txns') || "[]");
+  if (usedTxns.includes(txn)) {
+    alert("❌ ይቅርታ! ይህ የትራንዛክሽን ቁጥር አስቀድሞ ጥቅም ላይ ውሏል። እባክዎ አዲስ ትክክለኛ የክፍያ ደረሰኝ ያስገቡ።");
+    return;
+  }
+
+  usedTxns.push(txn);
+  localStorage.setItem('dreamboard_used_txns', JSON.stringify(usedTxns));
+
+  const dbCode = document.getElementById('coachCodeInput').value.trim().toUpperCase() || "NONE";
+  await sendTelegramSuccessAlert(txn, dbCode);
+
+  closeModal();
+  openCleanDownloadModal();
 }
 
 async function openCleanDownloadModal() {
@@ -760,7 +833,6 @@ function unlockFreeBonus() {
   updateQR();
 }
 
-// 12ቱንም የካርድ ስታይሎች በከፍተኛ ፕሮፌሽናል ጥራት የሚያወጣ የካንቫስ ስክሪፕት
 async function renderBusinessCard() {
   const canvas = document.getElementById('cardCanvas');
   const ctx = canvas.getContext('2d');
@@ -784,11 +856,9 @@ async function renderBusinessCard() {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // 1. Base Background
   ctx.fillStyle = bg;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // 2. Geometric Accents depending on theme style
   ctx.save();
   if (theme.style === "curve_right") {
     ctx.beginPath();
@@ -831,14 +901,12 @@ async function renderBusinessCard() {
     ctx.fillStyle = accent;
     ctx.fill();
   } else {
-    // Elegant frame line
     ctx.lineWidth = 3;
     ctx.strokeStyle = accent;
     ctx.strokeRect(30, 30, canvas.width - 60, canvas.height - 60);
   }
   ctx.restore();
 
-  // 3. Avatar / Logo Area
   const avatarRadius = 80;
   const avatarX = 140;
   const avatarY = 180;
@@ -867,7 +935,6 @@ async function renderBusinessCard() {
   ctx.strokeStyle = accent;
   ctx.stroke();
 
-  // 4. Texts
   ctx.textAlign = "left";
   ctx.fillStyle = text;
   ctx.font = "bold 44px sans-serif";
@@ -886,7 +953,6 @@ async function renderBusinessCard() {
   ctx.stroke();
   ctx.globalAlpha = 1.0;
 
-  // Contact list
   const contacts = [
     `📞  ${phone}`,
     `✉️  ${email}`,
@@ -902,7 +968,6 @@ async function renderBusinessCard() {
     startY += 50;
   });
 
-  // Small Brand Logo at top right
   ctx.fillStyle = accent;
   ctx.font = "bold 22px sans-serif";
   ctx.textAlign = "right";
@@ -925,20 +990,6 @@ function openCardDownloadModal() {
 function openQRDownloadModal() {
   document.getElementById('qrDownloadModal').style.display = 'flex';
 }
-
-// Chapa Callback Handler
-window.addEventListener('DOMContentLoaded', async () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const isPaid = urlParams.get('paid') === 'true' || urlParams.get('status') === 'success';
-  const trxRef = urlParams.get('trx_ref') || urlParams.get('reference') || 'CHAPA-' + Date.now();
-
-  if (isPaid) {
-    document.getElementById('resultArea').style.display = 'block';
-    await renderBoard(false);
-    openCleanDownloadModal();
-    sendTelegramSuccessAlert(trxRef);
-  }
-});
 </script>
 
 </body>
