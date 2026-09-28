@@ -17,7 +17,7 @@
       min-height: 100vh;
     }
     .container {
-      max-width: 720px;
+      max-width: 760px;
       width: 100%;
       background: rgba(30, 41, 59, 0.75);
       backdrop-filter: blur(12px);
@@ -140,6 +140,87 @@
       color: #e2e8f0;
     }
 
+    /* Books Library Styling */
+    .library-section-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #f1c40f;
+      margin: 24px 0 12px 0;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .books-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+    @media (min-width: 600px) {
+      .books-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .book-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .book-card:hover {
+      transform: translateY(-2px);
+      border-color: #d4af37;
+    }
+    .book-cover {
+      width: 75px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 6px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.1);
+      background: #0f172a;
+    }
+    .book-info {
+      flex: 1;
+    }
+    .book-title {
+      font-size: 13px;
+      font-weight: bold;
+      color: #f1c40f;
+      margin: 0 0 2px 0;
+      line-height: 1.3;
+    }
+    .book-author {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-bottom: 5px;
+      font-style: italic;
+    }
+    .book-summary {
+      font-size: 11.5px;
+      color: #cbd5e1;
+      line-height: 1.45;
+      margin: 0;
+    }
+    .book-tag {
+      display: inline-block;
+      font-size: 9.5px;
+      background: rgba(212, 175, 55, 0.15);
+      color: #d4af37;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
     .modal-overlay {
       display: none;
       position: fixed;
@@ -185,15 +266,11 @@
       margin: 10px 0;
       background: #000;
     }
-    .tracker-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 11px; background: #0f172a; border-radius: 8px; overflow: hidden; }
-    .tracker-table th, .tracker-table td { border: 1px solid #334155; padding: 7px; text-align: center; }
-    .tracker-table th { background: #1e293b; color: #f1c40f; }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <!-- የባላዩት እይታ ራስጌ -->
   <div class="brand-header">
     <div class="brand-logo-text">BALAYUT EYTA</div>
     <div class="brand-sub">የ7ቱ የህይወት ዘርፎች ድሪም ቦርድ እና ዘመናዊ ኪው አርኮድ ያለው ቢዝነስ ካርድ ነፃ ስጦታ እና qr ኮድ</div>
@@ -315,16 +392,16 @@
       <div class="vip-badge">👑 የተጠቃሚዎች የክብር ስጦታ ጥቅል</div>
       <h3 style="color: #fff; margin: 4px 0 10px 0; font-size: 17px;">ህልምህን እውን ለማድረግ የተዘጋጀ የተሟላ የቢዝነስ ጥቅል!</h3>
       <p style="font-size: 13px; color: #cbd5e1; line-height: 1.6; margin: 0 0 12px 0;">
-        እንኳን ደስ አለዎት! ህልምን መጻፍ የመጀመሪያው የድል እርምጃ ነው። የ 5 ብር የሙከራ ክፍያ ሲፈጽሙ ድሪም ቦርድዎን ያለ ውሃ ምልክት ከማውረድ በተጨማሪ <strong>ከ 1,500 ብር በላይ ዋጋ ያላቸውን</strong> የሚከተሉትን 3 ልዩ ስጦታዎች በነፃ ያገኛሉ፦
+        እንኳን ደስ አለዎት! ህልምን መጻፍ የመጀመሪያው የድል እርምጃ ነው። የ 200 ብር ክፍያ ሲፈጽሙ ድሪም ቦርድዎን ያለ ውሃ ምልክት ከማውረድ በተጨማሪ <strong>ከ 2,500 ብር በላይ ዋጋ ያላቸውን</strong> የሚከተሉትን ልዩ ስጦታዎች በነፃ ያገኛሉ፦
       </p>
       <div class="vip-gift-item">🎁 <strong>ስጦታ 1፦</strong> በ12 ዓለም አቀፍ የዲዛይን ስታይል የተዘጋጀ ስማርት ዲጂታል ቢዝነስ ካርድ።</div>
       <div class="vip-gift-item">📱 <strong>ስጦታ 2፦</strong> ስልክዎን፣ ቴሌግራምዎን እና አድራሻዎን በአንድ ስካን የሚያገናኝ Smart QR Code።</div>
-      <div class="vip-gift-item">🗓️ <strong>ስጦታ 3፦</strong> ለ30 ቀናት ግብዎን በየሳምንቱ እየገመገሙ የሚሄዱበት የልምድ መከታተያ (Habit Tracker)።</div>
+      <div class="vip-gift-item">📚 <strong>ስጦታ 3፦</strong> የNLP፣ የሀገር ውስጥ፣ የውጪ ፐርሰናል ዲቨሎፕመንት፣ የሽያጭ እና የኔትወርክ ማርኬቲንግ ዲጂታል ላይብረሪ።</div>
     </div>
 
     <div style="background: rgba(15, 23, 42, 0.95); padding: 18px; border-radius: 14px; border: 1px solid #d4af37; text-align: center;">
       <p style="margin: 0 0 10px 0; font-weight: bold; font-size: 16px; color: #fff;">🎉 ናሙናው በተሳካ ሁኔታ ተዘጋጅቷል!</p>
-      <button class="btn" style="background: linear-gradient(135deg, #10b981, #059669); color: white;" onclick="openPaymentModal()">ሁሉንም ጥቅሎች በ 5 ብር አውርድ 🚀</button>
+      <button class="btn" style="background: linear-gradient(135deg, #10b981, #059669); color: white;" onclick="openPaymentModal()">ሁሉንም ጥቅሎች በ 200 ብር አውርድ 🚀</button>
     </div>
   </div>
 
@@ -363,6 +440,9 @@
       </div>
     </div>
 
+    <label>🏢 የድርጅትዎ ወይም የብራንድዎ ስም (አማራጭ)፦</label>
+    <input type="text" id="cardBrandName" placeholder="ምሳሌ፦ JOSPIRE CO. / የድርጅትዎ ስም" oninput="renderBusinessCard()">
+
     <label>ሙሉ ስም፦</label>
     <input type="text" id="cardName" value="ዮሐንስ መዝገቡ" oninput="renderBusinessCard()">
 
@@ -372,10 +452,13 @@
     <label>ስልክ ቁጥር፦</label>
     <input type="text" id="cardPhone" value="+251 948 622 684" oninput="renderBusinessCard(); updateQR();">
 
+    <label style="color: #38bdf8; font-weight: bold;">🔗 ወደ QR ኮዱ የሚገባ ሊንክ (Telegram, Website, TikTok ወይም WhatsApp)፦</label>
+    <input type="text" id="qrCustomLink" placeholder="ምሳሌ፦ https://t.me/Johni888 ወይም balayuteyta.com" value="https://t.me/Johni888" oninput="renderBusinessCard(); updateQR();">
+
     <label>ኢሜይል፦</label>
     <input type="text" id="cardEmail" value="contact@balayuteyta.com" oninput="renderBusinessCard()">
 
-    <label>ዌብሳይት / ቴሌግራም፦</label>
+    <label>ዌብሳይት / ቴሌግራም ዩዘርኔም፦</label>
     <input type="text" id="cardWebsite" value="balayuteyta.com" oninput="renderBusinessCard()">
 
     <label>አድራሻ፦</label>
@@ -389,68 +472,73 @@
     </div>
     <button class="btn" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff;" onclick="openCardDownloadModal()">የተዘጋጀውን ቢዝነስ ካርድ አውርድ 📥</button>
 
-    <!-- QR -->
+    <!-- ትልቁ QR ኮድ ለብቻው ማውረጃ -->
     <div style="margin-top: 25px; border-top: 1px dashed #334155; padding-top: 15px; text-align: center;">
-      <h4>📱 የእርስዎ ስማርት QR ኮድ (Dot Connect)</h4>
-      <img id="qrImageTag" src="" style="width: 160px; height: 160px; background: #fff; padding: 8px; border-radius: 12px; margin: 10px auto; display: block;" alt="QR Code">
-      <button class="btn" style="background: #4f46e5; color: #fff; width: auto; padding: 10px 24px;" onclick="openQRDownloadModal()">QR ኮዱን ለብቻው አውርድ 📥</button>
+      <h4>📱 የእርስዎ ስማርት QR ኮድ (ለትልቅ ህትመት እና ማህበራዊ ሚዲያ)</h4>
+      <img id="qrImageTag" src="" style="width: 170px; height: 170px; background: #fff; padding: 10px; border-radius: 14px; margin: 10px auto; display: block; border: 2px solid #38bdf8;" alt="QR Code">
+      <button class="btn" style="background: #4f46e5; color: #fff; width: auto; padding: 10px 24px;" onclick="openQRDownloadModal()">ትልቁን QR ኮድ ለብቻው አውርድ 📥</button>
     </div>
 
-    <!-- 30 ቀናት መከታተያ -->
-    <div style="margin-top: 25px; border-top: 1px dashed #334155; padding-top: 15px;">
-      <h4>3. የ30 ቀናት የድሪም ቦርድ ግብ መከታተያ</h4>
-      <div style="overflow-x: auto;">
-        <table class="tracker-table">
-          <thead>
-            <tr><th>ዘርፍ</th><th>ዋና ተግባር</th><th>ሳምንት 1</th><th>ሳምንት 2</th><th>ሳምንት 3</th><th>ሳምንት 4</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>1. መንፈሳዊ</td><td>ጸሎት / ምስጋና</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td></tr>
-            <tr><td>2. ጤና</td><td>ስፖርት / አመጋገብ</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td></tr>
-            <tr><td>3. ፋይናንስ</td><td>ቁጠባ / ገቢ ማሳደግ</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td></tr>
-            <tr><td>4. ቤተሰብ</td><td>የፍቅር ጊዜ</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td></tr>
-            <tr><td>5. ማህበራዊ</td><td>መልካም ማድረግ</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td></tr>
-            <tr><td>6. እውቀት</td><td>ንባብ / ስልጠና</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td></tr>
-            <tr><td>7. ራዕይ</td><td>ለህልም መትጋት</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td><td>[ ✓ ]</td></tr>
-          </tbody>
-        </table>
+    <!-- ልዩ ስጦታ 3፦ የተደራጀው ዲጂታል ላይብረሪ -->
+    <div style="margin-top: 30px; border-top: 1px dashed #334155; padding-top: 20px;">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <span class="vip-badge">📚 ልዩ ስጦታ 3</span>
+        <h3 style="color: #f1c40f; margin: 6px 0;">የስኬት፣ የNLP፣ የሽያጭ እና የኔትወርክ ማርኬቲንግ ዲጂታል ላይብረሪ</h3>
+        <p style="color: #94a3b8; font-size: 12.5px; margin: 0 auto; max-width: 600px; line-height: 1.5;">
+          ለአስተሳሰብ ለውጥ፣ ለኔትወርክ ስራዎና ለሽያጭ ብቃትዎ በሀገር ውስጥም ሆነ በዓለም አቀፍ ደረጃ የተመረጡ ምርጥ መጽሐፍት ማጠቃለያ፦
+        </p>
       </div>
-      <button class="btn" style="background: #0284c7; color: #fff; margin-top: 12px;" onclick="window.print()">ለህትመት አዘጋጅ (Print / PDF) 🖨️</button>
+
+      <!-- ክፍል 1፦ NLP (Neuro-Linguistic Programming) -->
+      <div class="library-section-title">🧠 1. NLP እና የአእምሮ ፕሮግራሚንግ (Mind Mastery & NLP)</div>
+      <div class="books-grid" id="nlpBooksContainer"></div>
+
+      <!-- ክፍል 2፦ የሀገር ውስጥ ፐርሰናል ዲቨሎፕመንት (10 መጽሐፍት) -->
+      <div class="library-section-title">🇪🇹 2. የሀገር ውስጥ ፐርሰናል ዲቨሎፕመንት መጽሐፍት (10)</div>
+      <div class="books-grid" id="localBooksContainer"></div>
+
+      <!-- ክፍል 3፦ የውጪ ፐርሰናል ዲቨሎፕመንት (10 መጽሐፍት) -->
+      <div class="library-section-title">🌍 3. የውጪ ታላላቅ ፐርሰናል ዲቨሎፕመንት መጽሐፍት (10)</div>
+      <div class="books-grid" id="globalBooksContainer"></div>
+
+      <!-- ክፍል 4፦ የሽያጭ እና የማሳመን ጥበብ (10 መጽሐፍት) -->
+      <div class="library-section-title">💼 4. የሽያጭ እና የንግድ ጥበብ (Sales, Pitching & Closing - 10)</div>
+      <div class="books-grid" id="salesBooksContainer"></div>
+
+      <!-- ክፍል 5፦ የኔትወርክ ማርኬቲንግ እና መሪነት (10 መጽሐፍት) -->
+      <div class="library-section-title">👥 5. የኔትወርክ ማርኬቲንግ እና ቲም ግንባታ (Network Marketing - 10)</div>
+      <div class="books-grid" id="networkBooksContainer"></div>
     </div>
   </div>
 </div>
 
-<!-- የቀጥታ የባንክና የቴሌብር ክፍያ ሞዳል (ለሙከራ በ5 ብር) -->
+<!-- የቀጥታ የባንክና የቴሌብር ክፍያ ሞዳል (200 ብር) -->
 <div class="modal-overlay" id="payModal">
   <div class="modal-content">
     <div class="brand-logo-text" style="font-size: 20px; margin-bottom: 6px;">BALAYUT EYTA</div>
-    <h3 style="color: #f1c40f; margin-top: 0; margin-bottom: 8px;">የሙከራ ክፍያ አማራጮች (5 ብር)</h3>
+    <h3 style="color: #f1c40f; margin-top: 0; margin-bottom: 8px;">የክፍያ አማራጮች (200 ብር)</h3>
     <p style="color: #cbd5e1; font-size: 13px; line-height: 1.5; margin-bottom: 15px;">
-      ከታች ባሉት የክፍያ አማራጮች <strong>5 ብር</strong> ከፍለው የትራንዛክሽን ቁጥሩን ከስር ያስገቡ፦
+      ከታች ባሉት የክፍያ አማራጮች <strong>200 ብር</strong> ከፍለው የትራንዛክሽን ቁጥሩን ከስር ያስገቡ፦
     </p>
 
-    <!-- ቴሌብር -->
     <div class="account-card" style="border-left: 4px solid #10b981;">
       <div style="font-weight: bold; color: #10b981;">📱 ቴሌብር (Telebirr)</div>
       <div class="acc-number">0948622684</div>
       <div style="color: #94a3b8; font-size: 12px;">ስም፦ ዮሐንስ መዝገቡ (Yohannes Mezgebu)</div>
     </div>
 
-    <!-- ንግድ ባንክ -->
     <div class="account-card" style="border-left: 4px solid #a855f7;">
       <div style="font-weight: bold; color: #c084fc;">🏦 የኢትዮጵያ ንግድ ባንክ (CBE)</div>
       <div class="acc-number">1000111021841</div>
       <div style="color: #94a3b8; font-size: 12px;">ስም፦ ዮሐንስ መዝገቡ (Yohannes Mezgebu)</div>
     </div>
 
-    <!-- አቢሲኒያ ባንክ -->
     <div class="account-card" style="border-left: 4px solid #38bdf8;">
       <div style="font-weight: bold; color: #38bdf8;">🏦 አቢሲኒያ ባንክ (Bank of Abyssinia)</div>
       <div class="acc-number">65168049</div>
       <div style="color: #94a3b8; font-size: 12px;">ስም፦ ዮሐንስ መዝገቡ (Yohannes Mezgebu)</div>
     </div>
 
-    <!-- የኦሮሚያ ህብረት ስራ ባንክ -->
     <div class="account-card" style="border-left: 4px solid #f97316;">
       <div style="font-weight: bold; color: #fb923c;">🏦 የኦሮሚያ ህብረት ስራ ባንክ (Coop Bank of Oromia)</div>
       <div class="acc-number">1011000083793</div>
@@ -474,7 +562,7 @@
     <img id="cleanBoardPreview" class="saved-image-preview" src="" alt="Dream Board">
 
     <button class="btn" style="background: #f59e0b; color: #0b0f19;" onclick="openImageInNewTab('cleanBoardPreview')">ምስሉን በትልቁ ክፈት 🔍</button>
-    <button class="btn" style="background: #10b981; color: #fff; margin-top: 8px;" onclick="unlockFreeBonus()">ወደ 12ቱ ቢዝነስ ካርድ እና QR ኮድ ስጦታዬ ሂድ 👉</button>
+    <button class="btn" style="background: #10b981; color: #fff; margin-top: 8px;" onclick="unlockFreeBonus()">ወደ 12ቱ ቢዝነስ ካርድ እና የዲጂታል ላይብረሪ ስጦታዬ ሂድ 👉</button>
   </div>
 </div>
 
@@ -505,6 +593,351 @@ const TG_BOT_TOKEN = "8193427205:AAE8_NiaxstpLz69BzVkirBuBeaysIT3WjE";
 const TG_CHAT_ID = "1230396565";
 
 const innerValues = ["ፍቅር", "ደስታ", "ሰላም", "ጤና", "መተራረፍ", "ስኬት", "ርህራሄ"];
+
+// 1. NLP መጽሐፍት
+const nlpBooks = [
+  {
+    title: "Frogs into Princes (የNLP መሠረት)",
+    author: "Richard Bandler & John Grinder",
+    tag: "NLP Foundation",
+    cover: "https://covers.openlibrary.org/b/isbn/0911226192-M.jpg",
+    summary: "የNLP መስራቾች አእምሮን እንዴት እንደገና ማደራጀት፣ የውስጥ ፍርሃትን ማጥፋትና ፈጣን የባህሪ ለውጥ ማምጣት እንደሚቻል ያስተማሩበት ታሪካዊ መጽሐፍ።"
+  },
+  {
+    title: "Unlimited Power (ገደብ አልባ ኃይል)",
+    author: "Anthony Robbins",
+    tag: "NLP & Peak Performance",
+    cover: "https://covers.openlibrary.org/b/isbn/0684845776-M.jpg",
+    summary: "ቶኒ ሮቢንስ NLPን በመጠቀም አእምሮን፣ እምነትን፣ የአካል እንቅስቃሴንና ቋንቋን ለከፍተኛ ስኬት እንዴት ፕሮግራም እንደምናደርግ ያሳየበት መጽሐፍ።"
+  },
+  {
+    title: "Heart of the Mind",
+    author: "Connirae Andreas & Steve Andreas",
+    tag: "NLP Practical Tools",
+    cover: "https://covers.openlibrary.org/b/isbn/0911226311-M.jpg",
+    summary: "አስጨናቂ ትውስታዎችን፣ ጥርጣሬንና ራስን መውቀስን በNLP ተግባራዊ ቴክኒኮች በደቂቃዎች ውስጥ ወደ አዎንታዊ ጉልበት የመቀየሪያ ዘዴ።"
+  }
+];
+
+// 2. የሀገር ውስጥ 10 ፐርሰናል ዲቨሎፕመንት መጽሐፍት
+const localBooks = [
+  {
+    title: "1. ኑሮ እንደ እሸት",
+    author: "ዶ/ር ምህረት ደበበ",
+    tag: "Mindset & Psychology",
+    cover: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=150&q=80",
+    summary: "የሰው ልጅ ውስጣዊ ማንነት፣ የአስተሳሰብ ብስለት እና በህይወት አውድማ ውስጥ ስኬታማና ሚዛናዊ ሆኖ የመኖር ጥበብን በስነ-ልቦና ያብራራል።"
+  },
+  {
+    title: "2. የራስህ ጠበቃ",
+    author: "ካሌብ አዳም",
+    tag: "Self Worth & Identity",
+    cover: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=150&q=80",
+    summary: "ራስን ከጥፋተኝነት፣ ከፍርሃትና ከውጭ ወቀሳዎች ነፃ በማውጣት ለራስህ ጠንካራ ተሟጋችና መሪ በመሆን ህይወትህን መምራት።"
+  },
+  {
+    title: "3. ህልም አለኝ",
+    author: "ዳዊት ድሪምስ (Dawit Dreams)",
+    tag: "Dream & Execution",
+    cover: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=150&q=80",
+    summary: "ህልምን ከሃሳብ ወደ ተግባር ለመለወጥ የሚያስፈልጉ መሰረታዊ የዲሲፕሊን፣ የስራ ፈጠራ እና የፅናት መመሪያዎች።"
+  },
+  {
+    title: "4. ከፈተና ወደ ስኬት",
+    author: "ዶ/ር ወዳጄነህ መሀረነ",
+    tag: "Resilience",
+    cover: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=150&q=80",
+    summary: "በህይወት ውስጥ የሚያጋጥሙ መከራዎችን፣ ውድቀቶችንና ተግዳሮቶችን ለታላቅ ስኬት እንደ ማለፊያ ድልድይ የመጠቀሚያ ጥበብ።"
+  },
+  {
+    title: "5. የድል አክሊል",
+    author: "ማስተዋል ብርሃኑ",
+    tag: "Motivation & Goal",
+    cover: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=150&q=80",
+    summary: "በማንኛውም የስራ ዘርፍ የራስን የላቀ ደረጃ ማሳየት እና ግብን በትጋት አሳክቶ አሸናፊ ሆኖ የመውጣት ህጎች።"
+  },
+  {
+    title: "6. እወቅበት",
+    author: "ዶ/ር እዮብ ማሞ",
+    tag: "Life Skills & Wisdom",
+    cover: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=150&q=80",
+    summary: "በግንኙነት፣ በገንዘብ አያያዝ፣ በስራ አመራርና በህይወት አቅጣጫ ውስጥ ወሳኝ የሆኑ የጥበብና የማስተዋል መርሆች።"
+  },
+  {
+    title: "7. ራስን መፈለግ",
+    author: "ዳንኤል ክብረት",
+    tag: "Character & Value",
+    cover: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=150&q=80",
+    summary: "እውነተኛ ማንነትን ማግኘት፣ ማህበራዊ እሴቶችን ማጎልበት እና ለማህበረሰብ የሚተርፍ ጥልቅ ስብዕና መገንባት።"
+  },
+  {
+    title: "8. ራዕይ እና ተልዕኮ",
+    author: "ዶ/ር ሳሙኤል ክፍሌ",
+    tag: "Vision & Leadership",
+    cover: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=150&q=80",
+    summary: "የግል ህይወትንና ተቋማትን በጠንካራ ራዕይ ላይ በማነጽ ተጨባጭና የማይደበዝዝ አሻራ የማሳረፍ ጥበብ።"
+  },
+  {
+    title: "9. የውስጥ ጥንካሬ",
+    author: "ተስፋዬ አበበ",
+    tag: "Emotional Strength",
+    cover: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=150&q=80",
+    summary: "የስሜት ቁጥጥርን ማዳበር፣ ተስፋ መቁረጥን ማሸነፍ እና በውስጣዊ መንፈሳዊ ጥንካሬ ወደፊት የመገስገስ ስልት።"
+  },
+  {
+    title: "10. አስተሳሰብን መለወጥ",
+    author: "አበራ ደምሴ",
+    tag: "Mind Transformation",
+    cover: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=150&q=80",
+    summary: "የድህነትና የውድቀት አስተሳሰብን ሰብሮ ወደ አሸናፊና ባለፀጋ አስተሳሰብ የመሸጋገር ሳይኮሎጂ።"
+  }
+];
+
+// 3. የውጪ 10 ፐርሰናል ዲቨሎፕመንት መጽሐፍት
+const globalBooks = [
+  {
+    title: "1. Think and Grow Rich",
+    author: "Napoleon Hill",
+    tag: "Mindset & Wealth",
+    cover: "https://covers.openlibrary.org/b/isbn/1585424331-M.jpg",
+    summary: "የሀብት ሁሉ መነሻ በግልጽ የተቀመጠ ራዕይ፣ እምነትና ያልተቋረጠ ፅናት እንደሆነ ያስተማረ የዘመናት ድንቅ መጽሐፍ።"
+  },
+  {
+    title: "2. Atomic Habits",
+    author: "James Clear",
+    tag: "Habits & Routine",
+    cover: "https://covers.openlibrary.org/b/isbn/0735211299-M.jpg",
+    summary: "የየቀኑ 1% ጥቃቅን መልካም ልማዶች በጊዜ ሂደት ተባዝተው ወደ ግዙፍ እና አስደናቂ የስኬት ውጤት እንዴት እንደሚቀየሩ ያሳያል።"
+  },
+  {
+    title: "3. 7 Habits of Highly Effective People",
+    author: "Stephen R. Covey",
+    tag: "Character & Principles",
+    cover: "https://covers.openlibrary.org/b/isbn/0743269519-M.jpg",
+    summary: "ከጥገኝነት ወደ እውነተኛ ነፃነትና ውጤታማነት የሚያሸጋግሩ የህይወትና የመሪነት 7 መሠረታዊ ልምዶች።"
+  },
+  {
+    title: "4. The Magic of Thinking Big",
+    author: "David J. Schwartz",
+    tag: "Confidence & Big Goals",
+    cover: "https://covers.openlibrary.org/b/isbn/0671646788-M.jpg",
+    summary: "ፍርሃትን ማሸነፍ፣ በራስ መተማመንን ማጎልበት እና አእምሮን ለትላልቅ እድሎችና ህልሞች ክፍት የማድረግ ጥበብ።"
+  },
+  {
+    title: "5. 7 Strategies for Wealth & Happiness",
+    author: "Jim Rohn",
+    tag: "Philosophy of Success",
+    cover: "https://covers.openlibrary.org/b/isbn/0761506160-M.jpg",
+    summary: "ታላቁ ጂም ሮን ግብ አወሳሰድን፣ የጊዜ አጠቃቀምን እና ራስን በየቀኑ ማሳደግን በተመለከተ ያስቀመጣቸው 7 መሠረቶች።"
+  },
+  {
+    title: "6. Can't Hurt Me",
+    author: "David Goggins",
+    tag: "Mental Toughness",
+    cover: "https://covers.openlibrary.org/b/isbn/1544512287-M.jpg",
+    summary: "የአእምሮን 40% ወሰን በመስበር በማንኛውም አስቸጋሪ ሁኔታ ውስጥ የማይበገር ጠንካራ ስብዕና የመገንባት ታሪክ።"
+  },
+  {
+    title: "7. As a Man Thinketh",
+    author: "James Allen",
+    tag: "Power of Thoughts",
+    cover: "https://covers.openlibrary.org/b/isbn/1503055361-M.jpg",
+    summary: "ሰው ማለት ቀኑን ሙሉ የሚያስበው ነገር ውጤት ነው፤ ሃሳብህን በማጥራት ህይወትህን መለወጥ እንደምትችል ያሳያል።"
+  },
+  {
+    title: "8. Limitless",
+    author: "Jim Kwik",
+    tag: "Brain & Memory",
+    cover: "https://covers.openlibrary.org/b/isbn/1401958230-M.jpg",
+    summary: "አእምሮን ማሻሻል፣ ፈጣን ንባብ፣ የማስታወስ ብቃትን መጨመር እና በውስጥህ የተኛውን ገደብ የለሽ አቅም ማውጣት።"
+  },
+  {
+    title: "9. The Compound Effect",
+    author: "Darren Hardy",
+    tag: "Daily Discipline",
+    cover: "https://covers.openlibrary.org/b/isbn/9390924634-M.jpg",
+    summary: "በየቀኑ የሚደረጉ ጥቃቅን ትክክለኛ ውሳኔዎች እንዴት ተደምረው ወደ ታላቅ የህይወት ድል እንደሚያደርሱ የሚያስረዳ።"
+  },
+  {
+    title: "10. Awaken the Giant Within",
+    author: "Anthony Robbins",
+    tag: "Personal Mastery",
+    cover: "https://covers.openlibrary.org/b/isbn/0671791540-M.jpg",
+    summary: "በውስጥህ ያለውን ግዙፍ አቅም በማንቃት ስሜትህን፣ ጤናህን፣ ግንኙነትህንና ፋይናንስህን ሙሉ በሙሉ የመቆጣጠር ጥበብ።"
+  }
+];
+
+// 4. የሽያጭ እና የማሳመን 10 መጽሐፍት
+const salesBooks = [
+  {
+    title: "1. $100M Offers",
+    author: "Alex Hormozi",
+    tag: "Grand Slam Offers",
+    cover: "https://covers.openlibrary.org/b/isbn/1737475731-M.jpg",
+    summary: "ደንበኞች እምቢ ማለት የማይችሉትን እጅግ ማራኪ እና ከፍተኛ ዋጋ ያለው የቢዝነስ አቅርቦት እንዴት መፍጠር እንደሚቻል ያስተምራል።"
+  },
+  {
+    title: "2. $100M Leads",
+    author: "Alex Hormozi",
+    tag: "Lead Generation",
+    cover: "https://covers.openlibrary.org/b/isbn/1737475715-M.jpg",
+    summary: "ለማንኛውም ቢዝነስ ወይም የኔትወርክ ስራ ማለቂያ የሌላቸው ገዥ ደንበኞችን (Leads) በተለያዩ መንገዶች የማግኛ ስልት።"
+  },
+  {
+    title: "3. Pitch Anything",
+    author: "Oren Klaff",
+    tag: "Deal Closing",
+    cover: "https://covers.openlibrary.org/b/isbn/0071752854-M.jpg",
+    summary: "ማንኛውንም ሃሳብ፣ ፕሮፖዛል ወይም የቢዝነስ እቅድ በሰከንዶች ውስጥ አሳምኖ ውል የመጨረስ እና የማሳመን ሳይኮሎጂ።"
+  },
+  {
+    title: "4. The Psychology of Selling",
+    author: "Brian Tracy",
+    tag: "Sales Mindset",
+    cover: "https://covers.openlibrary.org/b/isbn/0785288066-M.jpg",
+    summary: "ሽያጭ ከቴክኒክ በላይ የስነ-ልቦና ጨዋታ ነው፤ የደንበኞችን ስሜት በመረዳት የሽያጭ መጠንን በእጥፍ የማሳደግ መመሪያ።"
+  },
+  {
+    title: "5. Way of the Wolf",
+    author: "Jordan Belfort",
+    tag: "Straight Line System",
+    cover: "https://covers.openlibrary.org/b/isbn/1501164287-M.jpg",
+    summary: "ማንኛውንም ሰው ከአጠራጣሪነት ወደ 100% እርግጠኝነት በማምጣት ሽያጭን ያለ ውጣ ውረድ የመዝጋት ስልት።"
+  },
+  {
+    title: "6. Spin Selling",
+    author: "Neil Rackham",
+    tag: "Consultative Sales",
+    cover: "https://covers.openlibrary.org/b/isbn/0070511136-M.jpg",
+    summary: "ትክክለኛ ጥያቄዎችን በመጠየቅ የደንበኛውን ህመም ማወቅ እና ምርትህን እንደ ብቸኛ መፍትሄ አድርጎ የማቅረብ ሳይንስ።"
+  },
+  {
+    title: "7. Sell or Be Sold",
+    author: "Grant Cardone",
+    tag: "Aggressive Closing",
+    cover: "https://covers.openlibrary.org/b/isbn/0990365205-M.jpg",
+    summary: "በህይወት ውስጥ ሁሉ ነገር ሽያጭ ነው፤ መጀመሪያ ራስህን በምርትህ ካላመንክ ሰዎችን ማሳመን እንደማትችል ያሳያል።"
+  },
+  {
+    title: "8. Never Split the Difference",
+    author: "Chris Voss",
+    tag: "High Stakes Negotiation",
+    cover: "https://covers.openlibrary.org/b/isbn/0062407805-M.jpg",
+    summary: "የቀድሞው የFBI ታጋቾች አስለቃቂ ድርድር አድራጊ ክሪስ ቮስ የሰዎችን ስነ-ልቦና በመምራት በንግድ ድርድር ውስጥ አሸናፊ የመሆን ዘዴ።"
+  },
+  {
+    title: "9. To Sell Is Human",
+    author: "Daniel H. Pink",
+    tag: "Modern Persuasion",
+    cover: "https://covers.openlibrary.org/b/isbn/1594631905-M.jpg",
+    summary: "በዘመናችን ሰዎችን የማሳመን፣ የማንቀሳቀስ እና ሃሳብን የማስረጽ ጥበብ እንዴት እንደሚሰራ የሚያብራራ።"
+  },
+  {
+    title: "10. Secrets of Closing the Sale",
+    author: "Zig Ziglar",
+    tag: "Classic Closing",
+    cover: "https://covers.openlibrary.org/b/isbn/0800759753-M.jpg",
+    summary: "ሰዎች የሚፈልጉትን እንዲያገኙ ካገዝካቸው አንተ የምትፈልገውን ሁሉ በሽያጭ ማግኘት እንደምትችል ያስተማረ መጽሐፍ።"
+  }
+];
+
+// 5. የኔትወርክ ማርኬቲንግ 10 መጽሐፍት
+const networkBooks = [
+  {
+    title: "1. Go Pro (7 Steps)",
+    author: "Eric Worre",
+    tag: "Network Pro Guide",
+    cover: "https://covers.openlibrary.org/b/isbn/0988667908-M.jpg",
+    summary: "በኔትወርክ ማርኬቲንግ ሙያዊ ደረጃ ላይ ለመድረስ ሰዎችን እንዴት መጋበዝ፣ ማቅረብ እና መምራት እንደሚቻል የሚያሳይ መጽሐፍ።"
+  },
+  {
+    title: "2. The Business of the 21st Century",
+    author: "Robert Kiyosaki",
+    tag: "Business Model",
+    cover: "https://covers.openlibrary.org/b/isbn/1607740049-M.jpg",
+    summary: "ኔትወርክ ማርኬቲንግ ለምን ለሁሉም ሰው ክፍት የሆነ ትክክለኛ የሀብት ማፍሪያ የቢዝነስ ሞዴል እንደሆነ ያስረዳል፤ ራስህ ቢዝነስ እንድትጀምር ያነቃቃል።"
+  },
+  {
+    title: "3. Your First Year in Network Marketing",
+    author: "Mark Yarnell",
+    tag: "Survival & Growth",
+    cover: "https://covers.openlibrary.org/b/isbn/0761512195-M.jpg",
+    summary: "በኔትወርክ ስራ የመጀመሪያ አመት የሚያጋጥሙ ተግዳሮቶችንና እምቢታዎችን (Rejection) አልፎ ጠንካራ ቡድን የመገንቢያ መመሪያ።"
+  },
+  {
+    title: "4. Building an Empire",
+    author: "Brian Carruthers",
+    tag: "Duplication & Systems",
+    cover: "https://covers.openlibrary.org/b/isbn/0985257008-M.jpg",
+    summary: "በኔትወርክ ማርኬቲንግ ስርዓት ያለው፣ ራስ-ሰር የሚባዛ (Duplication) እና ግዙፍ የሽያጭ ቡድን እንዴት መገንባት እንደሚቻል የሚያስተምር።"
+  },
+  {
+    title: "5. How to Win Friends & Influence People",
+    author: "Dale Carnegie",
+    tag: "People Skills",
+    cover: "https://covers.openlibrary.org/b/isbn/0671027034-M.jpg",
+    summary: "ሰዎችን የመማረክ፣ የመደመጥ፣ ጠንካራ ወዳጅነት የመፍጠር እና በኔትወርክ ስራ ውስጥ ተደማጭ የመሆን ቁልፍ ጥበብ።"
+  },
+  {
+    title: "6. Rich Dad's Cashflow Quadrant",
+    author: "Robert Kiyosaki",
+    tag: "Financial Freedom",
+    cover: "https://covers.openlibrary.org/b/isbn/1612680054-M.jpg",
+    summary: "ከተቀጣሪነት ወደ ቢዝነስ ባለቤትነት እና ኢንቨስተርነት ለመሸጋገር ኔትወርክ ማርኬቲንግ እንዴት ድልድይ እንደሚሆን ያሳያል።"
+  },
+  {
+    title: "7. Rock Your Network Marketing Business",
+    author: "Sarah Robbins",
+    tag: "Action Plan",
+    cover: "https://covers.openlibrary.org/b/isbn/1628650125-M.jpg",
+    summary: "በኔትወርክ ማርኬቲንግ ከዜሮ ተነስቶ ከፍተኛ ገቢ የሚያስገኝ ቡድን ለመገንባት የሚያስፈልጉ የየቀኑ ተግባራት።"
+  },
+  {
+    title: "8. The 45 Second Presentation",
+    author: "Don Failla",
+    tag: "Simplicity & Duplication",
+    cover: "https://covers.openlibrary.org/b/isbn/0978921808-M.jpg",
+    summary: "ኔትወርክ ማርኬቲንግን በጣም ቀላል እና በቀላሉ ሊባዛ በሚችል መንገድ ለሰዎች የማስረዳት ጥበብ።"
+  },
+  {
+    title: "9. Get Over Your Damn Self",
+    author: "Romi Neustadt",
+    tag: "No Excuses",
+    cover: "https://covers.openlibrary.org/b/isbn/0997931303-M.jpg",
+    summary: "ፍርሃትንና ማመንታትን አስወግዶ በኔትወርክ ስራህ ላይ ሙሉ ትኩረት በማድረግ የገንዘብ ነፃነትን የማግኘት መመሪያ።"
+  },
+  {
+    title: "10. GoPro Recruiting Mastery",
+    author: "Eric Worre",
+    tag: "Team Building",
+    cover: "https://covers.openlibrary.org/b/isbn/0988667908-M.jpg",
+    summary: "ጠንካራ መሪዎችን ወደ ቡድንህ እንዴት መሳብ እንደምትችል እና ኔትወርክህን በዓለም አቀፍ ደረጃ የማስፋፊያ ጥበብ።"
+  }
+];
+
+function renderSection(list, elementId) {
+  const container = document.getElementById(elementId);
+  if (!container) return;
+  container.innerHTML = list.map(book => `
+    <div class="book-card">
+      <img class="book-cover" src="${book.cover}" alt="${book.title}" onerror="this.src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=150&q=80'">
+      <div class="book-info">
+        <span class="book-tag">${book.tag}</span>
+        <h4 class="book-title">${book.title}</h4>
+        <div class="book-author">ደራሲ፦ ${book.author}</div>
+        <p class="book-summary">${book.summary}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderAllLibraries() {
+  renderSection(nlpBooks, 'nlpBooksContainer');
+  renderSection(localBooks, 'localBooksContainer');
+  renderSection(globalBooks, 'globalBooksContainer');
+  renderSection(salesBooks, 'salesBooksContainer');
+  renderSection(networkBooks, 'networkBooksContainer');
+}
 
 const cardThemes = {
   nexora_gold:     { bg: "#111111", accent: "#f59e0b", text: "#ffffff", style: "curve_right" },
@@ -548,6 +981,16 @@ function readImg(file) {
       img.src = e.target.result;
     };
     reader.readAsDataURL(file);
+  });
+}
+
+function loadImgByUrl(url) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => resolve(img);
+    img.onerror = () => resolve(null);
+    img.src = url;
   });
 }
 
@@ -720,7 +1163,7 @@ async function renderBoard(withWatermark = true) {
     ctx.textAlign = "center";
     ctx.fillText("🔒 ናሙና / PREVIEW ONLY", 0, -50);
     ctx.font = "bold 30px sans-serif";
-    ctx.fillText("ለማውረድ 5 ብር ይክፈሉ", 0, 15);
+    ctx.fillText("ለማውረድ 200 ብር ይክፈሉ", 0, 15);
     ctx.fillText("balayuteyta.com", 0, 70);
     ctx.strokeStyle = "rgba(220, 38, 38, 0.35)";
     ctx.lineWidth = 4;
@@ -760,16 +1203,16 @@ function closeModal() {
 
 async function sendTelegramSuccessAlert(txn, dbCode) {
   const isCoded = dbCode && dbCode !== "NONE" && dbCode !== "";
-  const coachShare = isCoded ? "2 ETB" : "0 ETB (ቀጥታ)";
-  const adminShare = isCoded ? "2 ETB" : "4 ETB";
-  const maintenance = "1 ETB";
+  const coachShare = isCoded ? "75 ETB" : "0 ETB (ቀጥታ)";
+  const adminShare = isCoded ? "75 ETB" : "150 ETB";
+  const maintenance = "50 ETB";
 
-  const message = `🔔 *አዲስ የድሪም ቦርድ የሙከራ ክፍያ (5 ብር)!*
+  const message = `🔔 *አዲስ የድሪም ቦርድ ክፍያ (200 ብር)!*
 ━━━━━━━━━━━━━━━━━━
 💳 *የትራንዛክሽን ቁጥር፦* \`${txn}\`
 🔖 *የድሪም ቦርድ መለያ (DB Code)፦* *${isCoded ? dbCode : 'የለም (Direct)'}*
 ━━━━━━━━━━━━━━━━━━
-💰 *የክፍያ ክፍፍል (5 ብር)፦*
+💰 *የክፍያ ክፍፍል (200 ብር)፦*
 ├ 🔧 የሲስተም ጥገና፦ *${maintenance}*
 ├ 👥 የተቆራኘ ድርሻ፦ *${coachShare}*
 └ 💼 የእርስዎ የተጣራ ትርፍ፦ *${adminShare}*
@@ -831,6 +1274,7 @@ function unlockFreeBonus() {
   bonusArea.scrollIntoView({ behavior: 'smooth' });
   applySelectedTheme();
   updateQR();
+  renderAllLibraries();
 }
 
 async function renderBusinessCard() {
@@ -844,6 +1288,7 @@ async function renderBusinessCard() {
   const accent = document.getElementById('cardAccentColor').value;
   const text = document.getElementById('cardTextColor').value;
 
+  const brandName = document.getElementById('cardBrandName').value.trim();
   const name = document.getElementById('cardName').value;
   const title = document.getElementById('cardTitle').value;
   const phone = document.getElementById('cardPhone').value;
@@ -907,9 +1352,9 @@ async function renderBusinessCard() {
   }
   ctx.restore();
 
-  const avatarRadius = 80;
-  const avatarX = 140;
-  const avatarY = 180;
+  const avatarRadius = 75;
+  const avatarX = 135;
+  const avatarY = 170;
 
   ctx.save();
   ctx.beginPath();
@@ -925,7 +1370,7 @@ async function renderBusinessCard() {
     ctx.font = "bold 55px sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText("B", avatarX, avatarY);
+    ctx.fillText(name ? name.charAt(0).toUpperCase() : "B", avatarX, avatarY);
   }
   ctx.restore();
 
@@ -937,16 +1382,16 @@ async function renderBusinessCard() {
 
   ctx.textAlign = "left";
   ctx.fillStyle = text;
-  ctx.font = "bold 44px sans-serif";
-  ctx.fillText(name, 260, 160);
+  ctx.font = "bold 42px sans-serif";
+  ctx.fillText(name, 245, 150);
 
   ctx.fillStyle = accent;
-  ctx.font = "bold 20px sans-serif";
-  ctx.fillText(title.toUpperCase(), 260, 205);
+  ctx.font = "bold 19px sans-serif";
+  ctx.fillText(title.toUpperCase(), 245, 195);
 
   ctx.beginPath();
-  ctx.moveTo(260, 230);
-  ctx.lineTo(750, 230);
+  ctx.moveTo(245, 220);
+  ctx.lineTo(720, 220);
   ctx.lineWidth = 2;
   ctx.strokeStyle = accent;
   ctx.globalAlpha = 0.5;
@@ -961,22 +1406,59 @@ async function renderBusinessCard() {
   ];
 
   ctx.font = "500 20px sans-serif";
-  let startY = 280;
+  let startY = 270;
   contacts.forEach((item) => {
     ctx.fillStyle = text;
-    ctx.fillText(item, 260, startY);
+    ctx.fillText(item, 245, startY);
     startY += 50;
   });
 
-  ctx.fillStyle = accent;
-  ctx.font = "bold 22px sans-serif";
-  ctx.textAlign = "right";
-  ctx.fillText("BALAYUT EYTA", canvas.width - 60, 75);
+  if (brandName) {
+    ctx.fillStyle = accent;
+    ctx.font = "bold 22px sans-serif";
+    ctx.textAlign = "right";
+    ctx.fillText(brandName.toUpperCase(), canvas.width - 60, 75);
+  }
+
+  const qrTarget = getQRTargetData();
+  const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(qrTarget)}`;
+  const qrImg = await loadImgByUrl(qrApiUrl);
+
+  if (qrImg) {
+    const qrSize = 145;
+    const qrX = canvas.width - 200;
+    const qrY = 240;
+
+    ctx.save();
+    ctx.fillStyle = "#ffffff";
+    ctx.shadowColor = "rgba(0,0,0,0.5)";
+    ctx.shadowBlur = 12;
+    ctx.fillRect(qrX - 8, qrY - 8, qrSize + 16, qrSize + 16);
+    ctx.restore();
+
+    ctx.strokeStyle = accent;
+    ctx.lineWidth = 3;
+    ctx.strokeRect(qrX - 8, qrY - 8, qrSize + 16, qrSize + 16);
+
+    ctx.drawImage(qrImg, qrX, qrY, qrSize, qrSize);
+
+    ctx.fillStyle = accent;
+    ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("SCAN TO CONNECT", qrX + qrSize / 2, qrY + qrSize + 24);
+  }
+}
+
+function getQRTargetData() {
+  const customLink = document.getElementById('qrCustomLink').value.trim();
+  if (customLink) return customLink;
+  const phone = document.getElementById('cardPhone').value.trim();
+  return `tel:${phone}`;
 }
 
 function updateQR() {
-  const phone = document.getElementById('cardPhone').value.trim();
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=tel:${encodeURIComponent(phone)}`;
+  const qrTarget = getQRTargetData();
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrTarget)}`;
   document.getElementById('qrImageTag').src = qrUrl;
   document.getElementById('qrPopImg').src = qrUrl;
 }
@@ -990,6 +1472,10 @@ function openCardDownloadModal() {
 function openQRDownloadModal() {
   document.getElementById('qrDownloadModal').style.display = 'flex';
 }
+
+window.addEventListener('DOMContentLoaded', () => {
+  renderAllLibraries();
+});
 </script>
 
 </body>
